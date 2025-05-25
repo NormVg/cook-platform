@@ -11,6 +11,12 @@ export const waitListUser = pgTable("cook-waitlist", {
   datetime: varchar("datetime").notNull(),
 });
 
+export const userData = pgTable("userData",{
+  id:varchar("id").primaryKey(),
+  username:varchar("username").unique().notNull(),
+  pointer:varchar("pointer").notNull(),
+  templatesUser:varchar("templatesUser").array().notNull().default([]),
+})
 
 
 export const templateData = pgTable("template-data",{
@@ -18,7 +24,7 @@ export const templateData = pgTable("template-data",{
   name: varchar("name").notNull(),
   category: varchar("category").notNull(),
   date: varchar("date").notNull(),
-  author: varchar("author").notNull(),
+  author: varchar("author").notNull().references(()=> userData.username ),
   stack: varchar("stack").array().notNull(),
   github: varchar("github").notNull(),
   version: varchar("version").notNull(),
@@ -35,8 +41,3 @@ export const fileBucket = pgTable("file-bucket",{
 })
 
 
-export const userData = pgTable("user-data",{
-    id:varchar("id").primaryKey(),
-    username:varchar("username").notNull(),
-    userTemplate:varchar("user-templates").notNull(),
-})

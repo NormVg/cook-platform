@@ -11,3 +11,13 @@
   --font: "JetBrains Mono", "Fira Code", monospace;
 }
 
+*{
+  color: var(--white);
+
+}
+
+body {
+  background-color: var(--bg);
+  font-family: var(--font);
+  scroll-behavior: smooth;
+}
