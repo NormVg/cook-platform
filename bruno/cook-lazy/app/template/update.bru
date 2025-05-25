@@ -1,0 +1,26 @@
+meta {
+  name: update
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3000/api/app/template/update
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "uid": "tpl_001",
+    "name": "Nuxt Blog Starter",
+    "category": "Nuxt",
+    "date": "2025-05-20",
+    "author": "Vishnu Gupta",
+    "stack": ["Nuxt 3", "TailwindCSS", "TypeScript"],
+    "github": "https://github.com/NormVg/nuxt-blog-starter",
+    "version": "1.0.2",
+    "fileID": "file_001"
+  }
+  
+}

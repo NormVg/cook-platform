@@ -1,0 +1,30 @@
+meta {
+  name: create
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/app/template/create
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "id": "tpl_002",
+    "name": "Nuxt Blog Starter",
+    "category": "Web",
+    "date": "2025-05-20",
+    "author": "NormVg",
+    "stack": ["Nuxt 3", "TailwindCSS", "TypeScript"],
+    "github": "https://github.com/NormVg/nuxt-blog-starter",
+    "version": "1.0.2",
+    "fileID": "file_001"
+  }
+  
+}
+
+body:multipart-form {
+  asdasd: valueee
+}

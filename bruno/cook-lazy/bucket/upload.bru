@@ -1,0 +1,19 @@
+meta {
+  name: upload
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3000/api/upload
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  file: @file(/home/vishnu/Downloads/IMG-20250309-WA0057.jpg)
+}
+
+body:file {
+  file: @file(/home/vishnu/Downloads/OG IMAGE COOK CLI.png) @contentType(image/png)
+}

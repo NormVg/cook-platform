@@ -1,0 +1,15 @@
+meta {
+  name: download bucket
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/api/bucket/?file=682ea4fa0009de3c5620
+  body: none
+  auth: inherit
+}
+
+params:query {
+  file: 682ea4fa0009de3c5620
+}
