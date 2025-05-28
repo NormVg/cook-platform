@@ -13,8 +13,8 @@ import MyBtn from './MyBtn.vue';
     <h3>CODE COOKING FOR LAZY DEVELOPERS</h3>
 
     <p>
-      A everyday CLI tool for you, like a swiss army knife? But for the
-      developers
+      A everyday CLI tool for you, like a swiss army knife?
+      But for the developers.
     </p>
 
     <div id="waitlist-btn" >
