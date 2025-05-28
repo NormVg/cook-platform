@@ -31,7 +31,7 @@
       </div>
       <div class="replay-container" v-if="animationComplete">
         <button class="replay-button" @click="replayAnimation">
-          <span class="replay-icon">↻</span> Replay Animation
+          <span class="replay-icon">↻</span> Replay
         </button>
       </div>
     </div>

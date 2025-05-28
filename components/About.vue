@@ -97,7 +97,7 @@
 
       <div id="af-sub">
         We're currently building the v1 version and accepting users to our
-        <span>waitlist</span>.
+        <span @click="scrollToElement('#waitlist-box')">waitlist</span>.
         Join up early to shape the future of Cook and get access tp internal
         builds, feedback loops, and plugin dev guides.
       </div>
@@ -172,6 +172,7 @@
 #af-sub span {
   color: whitesmoke;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .abi-head {

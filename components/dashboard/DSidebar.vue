@@ -1,25 +1,16 @@
 <script setup>
-import { useDashboardStore } from "~/store/dashboardStore";
 import logo from "~/assets/img/logo.svg";
 
 import { LayoutPanelTop,SquareDashedBottomCode,Key,Bolt,Telescope,MessageSquareText } from "lucide-vue-next";
 
-const dashboardStore = useDashboardStore();
 
-const props = defineProps({
-  username: {
-    type: String,
-    default: "TheNormVg",
-  },
-});
 </script>
 
 <template>
-  <Transition name="slide-fade">
     <div id="dash-sidebar" >
       <div id="title">
         <img :src="logo" alt="cook img" />
-        <div>{{ props.username }}</div>
+        <div>COOK</div>
       </div>
 
 
@@ -56,7 +47,6 @@ const props = defineProps({
 
 
     </div>
-  </Transition>
 </template>
 
 <style scoped>
@@ -69,6 +59,7 @@ const props = defineProps({
   justify-content: flex-start;
   gap: 10px;
   cursor: pointer;
+  font-size: 20px;
   font-weight: 600;
   border-bottom: 2px solid transparent;
   transition: all 0.2s ease-in-out;
@@ -85,19 +76,28 @@ const props = defineProps({
 
 #title {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   gap: 20px;
   width: 100%;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 20px;
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+#title div{
+  color: var(--green);
+
 }
 
 #dash-sidebar {
   width: 20%;
   height: calc(98vh - 40px);
-  border: 4px solid var(--white);
+  /* border: 1px solid var(--white); */
+  background-color: var(--bg2 );
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -106,20 +106,14 @@ const props = defineProps({
   padding: 0 10px;
   padding-top: 10px;
   margin-left: 10px;
+  border: 1px solid transparent;
+  transition: all ease-in-out 200ms;
+
 }
 
-.slide-fade-enter-active {
-  /* transition: all 0.3s ease-out; */
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+#dash-sidebar:hover{
+  border: 1px solid var(--border);
+
 }
 
-.slide-fade-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(-20px);
-  opacity: 0;
-}
 </style>

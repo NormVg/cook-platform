@@ -4,20 +4,27 @@ import { useDashboardStore } from '~/store/dashboardStore';
 
 const dashboardStore = useDashboardStore()
 
+const props = defineProps({
+  username:{
+    default:"TheNormVg",
+    type:String
+  }
+})
+
 </script>
 
 
 <template>
 <div id="dash-header">
 
-  <div>
-
+  <div id="dh-username">
+    {{ props.username }}
   </div>
 
 <div id="nav-links">
-  <NuxtLink to="/app" class="nav-link">
+  <!-- <NuxtLink to="/app" class="nav-link">
     Home
-  </NuxtLink>
+  </NuxtLink> -->
 
   <NuxtLink to="/app" class="nav-link">
     Docs
@@ -38,15 +45,21 @@ const dashboardStore = useDashboardStore()
 #dash-header{
   /* width: 100%; */
   height: 40px;
-  border: 4px solid var(--white);
+  background-color: var(--bg2);
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 3px 20px;
   margin-right: 10px;
   margin-left: 10px;
+  border: 1px solid transparent;
+  transition: all ease-in-out 200ms;
+}
 
-  transition: all 200ms ease-in-out;
+
+#dash-header:hover{
+border: 1px solid var(--border);
 }
 
 #nav-links {

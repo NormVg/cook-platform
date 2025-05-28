@@ -1,40 +1,24 @@
 <script setup>
-import DBox from './DBox.vue';
-import DHeader from './DHeader.vue';
-import DSidebar from './DSidebar.vue';
-
-
+import DBox from "./DBox.vue";
+import DHeader from "./DHeader.vue";
+import DSidebar from "./DSidebar.vue";
 </script>
 
-
 <template>
+  <div id="dashboard">
+    <DSidebar />
 
-<div id="dashboard" >
-  <DSidebar/>
+    <div id="dashboard-content">
+      <DHeader />
 
-  <div id="dashboard-content">
-
-    <DHeader/>
-
-
-    <DBox>
-
-
-      <slot>
-
-      </slot>
-    </DBox>
-
+      <DBox>
+        <slot> </slot>
+      </DBox>
+    </div>
   </div>
-
-
-</div>
-
 </template>
 
-
 <style scoped>
-
 #dashboard {
   width: 100%;
   height: calc(100vh - 40px);
@@ -43,7 +27,6 @@ import DSidebar from './DSidebar.vue';
   align-items: stretch;
   justify-content: space-between;
   /* gap: 10px; */
-
 
   position: fixed;
   left: 50%;
@@ -59,7 +42,4 @@ import DSidebar from './DSidebar.vue';
   align-items: stretch;
   justify-content: flex-start;
 }
-
 </style>
-
-

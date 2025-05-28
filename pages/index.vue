@@ -1,10 +1,5 @@
 <script>
-import About from '~/components/About.vue';
-import Features from '~/components/Features.vue';
-import Footer from '~/components/Footer.vue';
-import Header from '~/components/Header.vue';
-import Hero from '~/components/Hero.vue';
-import Waitlist from '~/components/Waitlist.vue';
+
 
 
 </script>
@@ -20,7 +15,9 @@ import Waitlist from '~/components/Waitlist.vue';
 <CustomCursor />
 </template>
 
-<style>
-
+<style scoped>
+* {
+cursor: none;
+}
 </style>
 

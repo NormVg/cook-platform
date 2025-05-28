@@ -46,6 +46,7 @@ import MyBtn from './MyBtn.vue';
   align-items: flex-start;
   gap: 30px;
   padding: 20px;
+
   /* flex-direction: column; */
 }
 
