@@ -12,8 +12,5 @@ useSeoMeta({
 
 })
 
-onMounted(()=>{
 
-  document.documentElement.classList.toggle('dark');
-})
 </script>

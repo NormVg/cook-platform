@@ -20,15 +20,14 @@
 
 <style scoped>
 #footer-box {
-  background-color: var(--bg2);
   color: #fff;
   padding: 20px;
   text-align: center;
   font-family: var(--font);
-  border-top: 5px solid var(--white);
-  border-bottom: 5px solid var(--white);
+  /* border-top: 5px solid var(--white);
+  border-bottom: 5px solid var(--white); */
   margin: 30px 0px;
-  margin-top: 200px;
+  /* margin-top: 200px; */
 }
 
 #footer-head {
@@ -55,17 +54,22 @@
 }
 
 .footer-nav-item:hover {
-  border-bottom: 1px solid var(--red);
+  /* border-bottom: 1px solid var(--red); */
+    background-color: var(--green);
+  color: var(--bg);
 }
 
 #footer-sub {
   font-size: 11px;
   margin-top: 20px;
   color: var(--white);
+  line-height: 30px;
 }
 
 .footer-link {
   color: var(--blue);
+  font-family: var(--font-ital);
+  font-size: 25px;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s ease;

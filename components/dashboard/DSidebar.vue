@@ -16,7 +16,7 @@ const props = defineProps({
 
 <template>
   <Transition name="slide-fade">
-    <div id="dash-sidebar" v-if="dashboardStore.isSidebarOpen">
+    <div id="dash-sidebar" >
       <div id="title">
         <img :src="logo" alt="cook img" />
         <div>{{ props.username }}</div>

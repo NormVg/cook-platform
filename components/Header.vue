@@ -1,78 +1,68 @@
-<template>
-<div id="header-box">
-
-  <img :src="LogoCook" alt="cook image">
-
-  <div id="header-nav">
-    <div class="header-nav-item" @click="scrollToElement('#feature-section')">FEATURES</div>
-    <div class="header-nav-item" @click="scrollToElement('#wait-box')">JOIN WAITLIST</div>
-    <!-- <a href="#" class="header-nav-item">FOLLOW JOURNEY</a> -->
-  </div>
-
-</div>
-</template>
-
 <script setup>
-import LogoCook from "../assets/img/logo.svg"
+import logo from "~/assets/img/logo.svg";
+
+// import { scrollToElement } from "~/utils/scrollView.js";
 </script>
 
-<style scoped>
+<template>
+  <div id="header-box">
+    <img :src="logo" alt="cook logo" />
 
+    <div id="nav-box">
+      <div class="nav-item" @click="scrollToElement('#feature-section')">FEATURES</div>
+
+      <div class="nav-item" @click="scrollToElement('#about-box')">ABOUT</div>
+
+      <div class="nav-item loginBtn">LOGIN</div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
 #header-box {
-  border: 5px solid var(--white);
-  margin: 30px;
-  margin-top: 5px;
-  height: 65px;
+  /* border: 1px solid salmon; */
+  padding: 10px 20px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 20px;
 }
 
 #header-box img {
-  height: 45px;
+  height: 50px;
 }
 
-#header-nav {
+#nav-box {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 40px;
-  width: max-content;
-  height: 100%;
+
+  gap: 20px;
 }
 
-.header-nav-item {
-  font-size: 16px;
-  font-weight: bold;
-  color: var(--white);
-  text-decoration: none;
+.nav-item{
+  padding: 5px 10px;
+  transition: 200ms all ease-in-out;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-  border-bottom: 1px solid var(--bg);
-
 }
 
-.header-nav-item:hover {
-
-  border-bottom: 1px solid salmon;
+.nav-item:hover{
+  background-color: var(--green);
+  color: var(--bg);
 }
 
-
+.loginBtn{
+  border: 1px solid var(--green);
+  border-radius: 5px;
+  color: var(--green);
+}
 
 
 @media (max-width: 640px) {
-
-#header-box {
-
-  margin: 15px;
-  margin-top: 15px;
-
-}
-
-.header-nav-item {
+.nav-item{
   font-size: 14px;
 }
-
 }
+
 </style>

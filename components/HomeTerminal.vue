@@ -151,13 +151,13 @@ onMounted(() => {
   background-color: #1a1a1a;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 
-  font-family: var(--font);
+  font-family: var(--term-font);
   font-size: 14px;
   line-height: 1.6;
   margin: 0;
   margin-right: 30px;
-  border: 5px solid var(--white);
-
+  border: 1px solid var(--white);
+  border-radius: 5px;
   padding: 20px;
   width: 50%;
   min-height: 480px;
@@ -183,21 +183,21 @@ onMounted(() => {
 }
 
 .command {
-  color: var(--white);
+  color: var(--green);
 }
 
 .output {
-  color: var(--yellow);
+  color: var(--green);
   margin-left: 10px;
 }
 
 .version {
-  color: var(--yellow);
+  color: var(--white);
   font-weight: bold;
 }
 
 .recipe-list {
-  color: var(--yellow);
+  color: var(--green);
   list-style-type: none;
   margin: 0;
   padding: 0 0 0 10px;
@@ -214,21 +214,21 @@ onMounted(() => {
 }
 
 .success-text {
-  color: var(--yellow);
+  color: var(--white);
 }
 
 .arrow-icon {
-  color: var(--yellow);
+  color: var(--green);
   margin-right: 10px;
 }
 
 .link-label {
-  color: var(--yellow);
+  color: var(--white);
   margin-right: 10px;
 }
 
 .link-url {
-  color: var(--yellow);
+  color: var(--green);
 }
 
 .cursor-line {
@@ -247,18 +247,18 @@ onMounted(() => {
 
 .replay-container {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   margin-top: 15px;
   width: 100%;
 }
 
 .replay-button {
   background-color: #2c2c2c;
-  border: 1px solid var(--green);
+  border: 1px solid var(--white);
   border-radius: 4px;
-  color: var(--green);
+  color: var(--white);
   cursor: pointer;
-  font-family: inherit;
+  font-family: var(--term-font);
   font-size: 12px;
   padding: 6px 12px;
   transition: all 0.3s ease;

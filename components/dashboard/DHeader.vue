@@ -10,9 +10,9 @@ const dashboardStore = useDashboardStore()
 <template>
 <div id="dash-header">
 
+  <div>
 
-    <PanelLeft color="#a8a7ac" v-if="!dashboardStore.isSidebarOpen" @click="dashboardStore.toggleSidebar()" />
-    <PanelLeft color="black" fill="#a8a7ac" v-else  @click="dashboardStore.toggleSidebar()"/>
+  </div>
 
 <div id="nav-links">
   <NuxtLink to="/app" class="nav-link">

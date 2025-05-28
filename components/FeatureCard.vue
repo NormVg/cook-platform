@@ -1,84 +1,75 @@
 <script setup>
 const props = defineProps({
-  icon: {
-    default: "📦",
-  },
   head: {
     default: "Code Snippet",
     type: String,
   },
   sub: {
-    default:"Store, reuse, and share code snippets both locally and publicly. Speed up your coding with ready-made solutions.",
+    default:
+      "Store, reuse, and share code snippets both locally and publicly. Speed up your coding with ready-made solutions.",
     type: String,
   },
 });
 </script>
 
 <template>
-
   <div id="card-feature-box">
-    <div id="card-feature">
-      <div id="feature-icon">
-        {{ props.icon }}
-      </div>
-
-      <div id="feature-head">
-        {{ props.head }}
-      </div>
-
-      <div id="feature-sub">
-        {{ props.sub }}
-      </div>
+    <div id="cf-icon">
+      <slot></slot>
     </div>
+    <div id="cf-head">{{ props.head }}</div>
+    <div id="cf-sub">{{ props.sub }}</div>
   </div>
 </template>
 
 <style scoped>
+#card-feature-box {
+  background-color: var(--bg2);
 
-#card-feature-box{
-  width: max-content;
-  height: max-content;
-  background-color: var(--white);
-}
-
-#card-feature-box:hover #card-feature{
-transform: translate(-10px , -10px);
-}
-
-#card-feature {
-  background-color: var(--bg);
-
-  border: 5px solid var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
   width: 250px;
-  aspect-ratio: 300/380;
-
+  aspect-ratio: 300/280;
+  padding: 10px;
+  padding-top: 30px;
   display: flex;
   justify-content: flex-start;
 
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
-  gap: 30px;
+  gap: 15px;
 
-  transition: all 100ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
-#feature-icon {
-  font-size: 38.2px;
-  margin-top: 20px;
+#card-feature-box:hover {
+  transform: translateY(-5px);
+  border: 1px solid var(--white);
 }
 
-#feature-head {
-  font-size: 23.61px;
-  color: var(--pink);
-  text-align: center;
+/* #cf-icon{
+  border: 1px solid salmon;
+} */
+
+#cf-head {
+  /* border: 1px solid salmon; */
+  font-size: 25px;
+  font-weight: 600;
+  color: whitesmoke;
 }
 
-#feature-sub {
-  width: 90%;
+#cf-sub {
+  /* border: 1px solid salmon; */
   font-size: 15px;
-  margin-bottom: 15px;
+  font-weight: 500;
+  font-family: var(--term-font);
 }
 
 
 
+@media (max-width: 640px) {
+  #card-feature-box {
+    width: 280px;
+  }
+}
 </style>
