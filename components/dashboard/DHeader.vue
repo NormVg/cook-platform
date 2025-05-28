@@ -1,48 +1,46 @@
 <script setup>
-import {PanelLeft} from 'lucide-vue-next';
-import { useDashboardStore } from '~/store/dashboardStore';
+import { PanelLeft } from "lucide-vue-next";
+import { useDashboardStore } from "~/store/dashboardStore";
 
-const dashboardStore = useDashboardStore()
+const dashboardStore = useDashboardStore();
 
 const props = defineProps({
-  username:{
-    default:"TheNormVg",
-    type:String
-  }
-})
-
+  username: {
+    default: "TheNormVg",
+    type: String,
+  },
+});
 </script>
 
-
 <template>
-<div id="dash-header">
+  <div id="dash-header">
+    <div id="dh-username">
+      <div @click="dashboardStore.toggleSideBar()">
+        <PanelLeft
+          v-if="dashboardStore.isSidebar"
+          color="#1A1A1A"
+          fill="#A8A7AC"
+        />
+        <PanelLeft v-else color="#A8A7AC" />
+      </div>
 
-  <div id="dh-username">
-    {{ props.username }}
+      {{ props.username }}
+    </div>
+
+    <div id="nav-links">
+      <!-- <NuxtLink to="/app" class="nav-link">
+            Home
+          </NuxtLink> -->
+
+      <NuxtLink to="/app" class="nav-link"> Docs </NuxtLink>
+
+      <NuxtLink to="/app" class="nav-link"> Community </NuxtLink>
+    </div>
   </div>
-
-<div id="nav-links">
-  <!-- <NuxtLink to="/app" class="nav-link">
-    Home
-  </NuxtLink> -->
-
-  <NuxtLink to="/app" class="nav-link">
-    Docs
-  </NuxtLink>
-
-  <NuxtLink to="/app" class="nav-link">
-    Community
-  </NuxtLink>
-</div>
-
-</div>
-
 </template>
 
-
 <style scoped>
-
-#dash-header{
+#dash-header {
   /* width: 100%; */
   height: 40px;
   background-color: var(--bg2);
@@ -57,17 +55,29 @@ const props = defineProps({
   transition: all ease-in-out 200ms;
 }
 
+#dh-username {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  /* border: 1px solid saddlebrown; */
+}
 
-#dash-header:hover{
-border: 1px solid var(--border);
+#dh-username div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3px;
+}
+
+#dash-header:hover {
+  border: 1px solid var(--border);
 }
 
 #nav-links {
   display: flex;
   gap: 20px;
-
 }
-
 
 .nav-link {
   color: var(--white);
@@ -75,15 +85,12 @@ border: 1px solid var(--border);
   font-size: 16px;
   font-weight: 500;
   border-bottom: 2px solid transparent;
-  transition:  all 200ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
 .nav-link:hover {
-    border-bottom: 2px solid var(--red);
-
+  border-bottom: 2px solid var(--red);
 }
-
-
 
 .v-enter-active,
 .v-leave-active {

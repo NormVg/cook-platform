@@ -1,52 +1,103 @@
 <script setup>
 import logo from "~/assets/img/logo.svg";
+import { useDashboardStore } from "~/store/dashboardStore";
+import { computed } from "vue";
 
-import { LayoutPanelTop,SquareDashedBottomCode,Key,Bolt,Telescope,MessageSquareText } from "lucide-vue-next";
 
+import {
+  LayoutPanelTop,
+  SquareDashedBottomCode,
+  Key,
+  Bolt,
+  Telescope,
+  MessageSquareText,
+} from "lucide-vue-next";
 
+const dashboardStore = useDashboardStore();
+{/* <AlignStartVertical color="#A8A7AC" /> */}
+const cstyle = computed(() => {
+  // 'border-bottom: 2px solid var(--red)'
+
+  var d = {
+    template: "",
+    snippet: "",
+    api: "",
+    setting: "",
+    explore: "",
+    feedback: "",
+  };
+
+  d[dashboardStore.nowDashboardTab] = "border-bottom: 2px solid var(--red)";
+
+  return d;
+});
 </script>
 
 <template>
-    <div id="dash-sidebar" >
-      <div id="title">
-        <img :src="logo" alt="cook img" />
-        <div>COOK</div>
-      </div>
+  <Transition name="slide-fade">
 
-
-
-      <div class="dash-sidebar-item" @click="">
-        <LayoutPanelTop />
-        <div>Template</div>
-      </div>
-
-      <div class="dash-sidebar-item" @click="">
-        <SquareDashedBottomCode />
-        <div>Snippets</div>
-      </div>
-
-      <div class="dash-sidebar-item" @click="">
-        <Key />
-        <div>API Keys</div>
-      </div>
-
-      <div class="dash-sidebar-item" @click="">
-        <Bolt />
-        <div>Settings</div>
-      </div>
-
-      <div class="dash-sidebar-item" @click="">
-        <Telescope />
-        <div>Explore</div>
-      </div>
-
-      <div class="dash-sidebar-item" @click="">
-        <MessageSquareText />
-        <div>Feedback</div>
-      </div>
-
-
+  <div id="dash-sidebar" v-if="dashboardStore.isSidebar">
+    <div id="title">
+      <img :src="logo" alt="cook img" />
+      <div>COOK</div>
     </div>
+
+    <div
+      class="dash-sidebar-item"
+      :style="cstyle['template']"
+      @click="dashboardStore.setNowDashboardTab('template')"
+    >
+      <LayoutPanelTop />
+      <div>Template</div>
+    </div>
+
+    <div
+      class="dash-sidebar-item"
+      :style="cstyle['snippet']"
+      @click="dashboardStore.setNowDashboardTab('snippet')"
+    >
+      <SquareDashedBottomCode />
+      <div>Snippets</div>
+    </div>
+
+    <div
+      class="dash-sidebar-item"
+      :style="cstyle['api']"
+      @click="dashboardStore.setNowDashboardTab('api')"
+    >
+      <Key />
+      <div>API Keys</div>
+    </div>
+
+    <div
+      class="dash-sidebar-item"
+      :style="cstyle['explore']"
+      @click="dashboardStore.setNowDashboardTab('explore')"
+    >
+      <Telescope />
+      <div>Explore</div>
+    </div>
+
+    <div
+      class="dash-sidebar-item"
+      :style="cstyle['setting']"
+      @click="dashboardStore.setNowDashboardTab('setting')"
+    >
+      <Bolt />
+      <div>Settings</div>
+    </div>
+
+    <div
+      class="dash-sidebar-item"
+      :style="cstyle['feedback']"
+      @click="dashboardStore.setNowDashboardTab('feedback')"
+    >
+      <MessageSquareText />
+      <div>Feedback</div>
+    </div>
+  </div>
+  </Transition>
+
 </template>
 
 <style scoped>
@@ -87,16 +138,15 @@ import { LayoutPanelTop,SquareDashedBottomCode,Key,Bolt,Telescope,MessageSquareT
   margin-top: 10px;
 }
 
-#title div{
+#title div {
   color: var(--green);
-
 }
 
 #dash-sidebar {
   width: 20%;
   height: calc(98vh - 40px);
   /* border: 1px solid var(--white); */
-  background-color: var(--bg2 );
+  background-color: var(--bg2);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -108,12 +158,28 @@ import { LayoutPanelTop,SquareDashedBottomCode,Key,Bolt,Telescope,MessageSquareT
   margin-left: 10px;
   border: 1px solid transparent;
   transition: all ease-in-out 200ms;
-
 }
 
-#dash-sidebar:hover{
+#dash-sidebar:hover {
   border: 1px solid var(--border);
-
 }
 
+
+
+
+
+
+.slide-fade-enter-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(-20px);
+  opacity: 0;
+}
 </style>
