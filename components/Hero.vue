@@ -1,10 +1,13 @@
 <script setup>
 import HomeTerminal from './HomeTerminal.vue';
+import MyBtn from './MyBtn.vue';
 
 </script>
 
 <template>
   <div id="hero-box">
+    <span>
+
     <h1>COOK</h1>
 
     <h3>CODE COOKING FOR LAZY DEVELOPERS</h3>
@@ -14,9 +17,14 @@ import HomeTerminal from './HomeTerminal.vue';
       developers
     </p>
 
-    <div id="waitlist-btn" @click="scrollToElement('#waitlist-box')">
-      WAITLIST
+    <div id="waitlist-btn" >
+      <!-- WAITLIST -->
+      <MyBtn color="green" :callback="() => scrollToElement('#waitlist-box')">
+        WAITLIST
+      </MyBtn>
     </div>
+
+    </span>
 
     <HomeTerminal/>
 
@@ -25,18 +33,31 @@ import HomeTerminal from './HomeTerminal.vue';
 
 <style scoped>
 
-#hero-box{
+/* #hero-box{
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+} */
+
+#hero-box{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 20px;
+  /* flex-direction: column; */
 }
+
+/* #hero-box span{
+  border: 1px solid salmon;
+} */
 
 h1{
   font-size: 80px;
   margin: 10px;
   color: whitesmoke;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 h3{
@@ -50,10 +71,18 @@ h3{
 p{
   font-size: 18px;
   font-family: var(--term-font);
+  margin-left: 10px;
 
 }
 
 #waitlist-btn{
+  margin-bottom: 50px;
+margin-top: 50px;
+margin-left: 20px;
+
+}
+
+/* #waitlist-btn{
   border: 2px solid var(--green);
   border-radius: 7px;
   padding: 10px;
@@ -64,22 +93,46 @@ p{
 }
 
 
+
 #waitlist-btn:hover{
   background-color: var(--green);
   color: var(--bg);
-}
+} */
 
 
 @media (max-width: 640px) {
-h3{
-  text-align: center;
+
+#hero-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 0;
+  padding: 0px;
+
 }
 
+h3{
+  text-align: center;
+
+}
+
+h1{
+
+  margin-top: 50px;
+  text-align: center;
+}
 
 p{
   text-align: center;
 }
 
+#waitlist-btn{
+  /* border: 1px solid salmon; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 
 }
