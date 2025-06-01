@@ -33,13 +33,15 @@ const handleSelectionChange = (params) => {
 
     <div id="dt-base">
       <table>
-        <tr>
-          <th>Name</th>
-          <th>Stack</th>
-          <th>More</th>
-        </tr>
-
-        <tr>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Stack</th>
+            <th>More</th>
+          </tr>
+        </thead>
+        <tbody>
+             <tr>
           <td>@react/mongo-express-bun</td>
           <td>react, mongo, express, bun</td>
           <td class="dtb-btn"><ThreeDotMenu /></td>
@@ -96,6 +98,7 @@ const handleSelectionChange = (params) => {
           <td>go, fiber, auth, postgres</td>
           <td class="dtb-btn"><ThreeDotMenu /></td>
         </tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -130,20 +133,41 @@ const handleSelectionChange = (params) => {
   border: 1px solid var(--border);
 }
 
+
+
+
 table {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   border-collapse: collapse;
 }
 
+/* thead{
+  border: 1px solid salmon;
+
+}
+
+tbody{
+  border: 1px solid seagreen;
+
+} */
+
 tr {
+  height: 35px;
+
   border-bottom: 1px solid var(--border);
+}
+
+tbody{
+  overflow-y: scroll;
 }
 
 th {
   text-align: left;
   padding-left: 15px;
-  height: 35px;
+  max-height: 35px;
+  min-height: 35px;
+
   position: sticky;
   top: 0;
   z-index: 2;
@@ -151,7 +175,6 @@ th {
 }
 
 td {
-
   height: 40px;
 
   padding-left: 15px;

@@ -7,6 +7,14 @@ export default defineNuxtConfig({
     appWriteKey: process.env.APPWRITE_API_KEY,
     appWriteProject: process.env.APPWRITE_API_PROJECT,
     appWriteBucket: process.env.APPWRITE_API_BUCKET,
+
+    public:{
+
+      taoAuthToken :process.env.TAO_AUTH_TOKEN,
+      taoAuthURL:process.env.TAO_AUTH_URL,
+      taoAuthCallback:process.env.TAO_AUTH_CALLBACK
+
+    }
   },
 
   css: ["~/assets/global.css"],

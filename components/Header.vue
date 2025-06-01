@@ -9,16 +9,36 @@ import logo from "~/assets/img/logo.svg";
     <img :src="logo" alt="cook logo" />
 
     <div id="nav-box">
+
+      <NuxtLink to="/app">
+        <div class="nav-item">
+          APP
+        </div>
+      </NuxtLink>
+
+
       <div class="nav-item" @click="scrollToElement('#feature-section')">FEATURES</div>
 
       <div class="nav-item" @click="scrollToElement('#about-box')">ABOUT</div>
 
-      <div class="nav-item loginBtn">LOGIN</div>
+      <NuxtLink to="/login">
+       <div class="nav-item loginBtn">
+          LOGIN
+        </div>
+      </NuxtLink>
+
+
+
     </div>
   </div>
 </template>
 
 <style scoped>
+
+a{
+  text-decoration: none
+}
+
 #header-box {
   /* border: 1px solid salmon; */
   padding: 10px 20px;

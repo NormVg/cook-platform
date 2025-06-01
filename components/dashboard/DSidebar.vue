@@ -3,8 +3,8 @@ import logo from "~/assets/img/logo.svg";
 import { useDashboardStore } from "~/store/dashboardStore";
 import { computed } from "vue";
 
-
 import {
+  LogOut,
   LayoutPanelTop,
   SquareDashedBottomCode,
   Key,
@@ -14,7 +14,9 @@ import {
 } from "lucide-vue-next";
 
 const dashboardStore = useDashboardStore();
-{/* <AlignStartVertical color="#A8A7AC" /> */}
+{
+  /* <AlignStartVertical color="#A8A7AC" /> */
+}
 const cstyle = computed(() => {
   // 'border-bottom: 2px solid var(--red)'
 
@@ -35,69 +37,76 @@ const cstyle = computed(() => {
 
 <template>
   <Transition name="slide-fade">
+    <div id="dash-sidebar" v-if="dashboardStore.isSidebar">
+      <div id="title">
+        <img :src="logo" alt="cook img" />
+        <div>COOK</div>
+      </div>
 
-  <div id="dash-sidebar" v-if="dashboardStore.isSidebar">
-    <div id="title">
-      <img :src="logo" alt="cook img" />
-      <div>COOK</div>
-    </div>
+      <div
+        class="dash-sidebar-item"
+        :style="cstyle['template']"
+        @click="dashboardStore.setNowDashboardTab('template')"
+      >
+        <LayoutPanelTop />
+        <div>Template</div>
+      </div>
 
-    <div
-      class="dash-sidebar-item"
-      :style="cstyle['template']"
-      @click="dashboardStore.setNowDashboardTab('template')"
-    >
-      <LayoutPanelTop />
-      <div>Template</div>
-    </div>
+      <div
+        class="dash-sidebar-item"
+        :style="cstyle['snippet']"
+        @click="dashboardStore.setNowDashboardTab('snippet')"
+      >
+        <SquareDashedBottomCode />
+        <div>Snippets</div>
+      </div>
 
-    <div
-      class="dash-sidebar-item"
-      :style="cstyle['snippet']"
-      @click="dashboardStore.setNowDashboardTab('snippet')"
-    >
-      <SquareDashedBottomCode />
-      <div>Snippets</div>
-    </div>
+      <div
+        class="dash-sidebar-item"
+        :style="cstyle['api']"
+        @click="dashboardStore.setNowDashboardTab('api')"
+      >
+        <Key />
+        <div>API Keys</div>
+      </div>
 
-    <div
-      class="dash-sidebar-item"
-      :style="cstyle['api']"
-      @click="dashboardStore.setNowDashboardTab('api')"
-    >
-      <Key />
-      <div>API Keys</div>
-    </div>
+      <div
+        class="dash-sidebar-item"
+        :style="cstyle['explore']"
+        @click="dashboardStore.setNowDashboardTab('explore')"
+      >
+        <Telescope />
+        <div>Explore</div>
+      </div>
 
-    <div
-      class="dash-sidebar-item"
-      :style="cstyle['explore']"
-      @click="dashboardStore.setNowDashboardTab('explore')"
-    >
-      <Telescope />
-      <div>Explore</div>
-    </div>
+      <div
+        class="dash-sidebar-item"
+        :style="cstyle['setting']"
+        @click="dashboardStore.setNowDashboardTab('setting')"
+      >
+        <Bolt />
+        <div>Settings</div>
+      </div>
 
-    <div
-      class="dash-sidebar-item"
-      :style="cstyle['setting']"
-      @click="dashboardStore.setNowDashboardTab('setting')"
-    >
-      <Bolt />
-      <div>Settings</div>
-    </div>
+      <div
+        class="dash-sidebar-item"
+        :style="cstyle['feedback']"
+        @click="dashboardStore.setNowDashboardTab('feedback')"
+      >
+        <MessageSquareText />
+        <div>Feedback</div>
+      </div>
 
-    <div
-      class="dash-sidebar-item"
-      :style="cstyle['feedback']"
-      @click="dashboardStore.setNowDashboardTab('feedback')"
-    >
-      <MessageSquareText />
-      <div>Feedback</div>
+      <div
+        class="dash-sidebar-item"
+
+        @click="logOutUser()"
+      >
+        <LogOut />
+        <div>Logout</div>
+      </div>
     </div>
-  </div>
   </Transition>
-
 </template>
 
 <style scoped>
@@ -163,11 +172,6 @@ const cstyle = computed(() => {
 #dash-sidebar:hover {
   border: 1px solid var(--border);
 }
-
-
-
-
-
 
 .slide-fade-enter-active {
   transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
