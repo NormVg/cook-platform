@@ -19,6 +19,8 @@ export const useCheckAndCreateCookUser = async () => {
       console.error("Failed to fetch templates:", error.value);
     }
 
+    console.log("Check User Data", data.value);
+
     if (data.value.isValid === true) {
       return true;
     } else {
