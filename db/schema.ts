@@ -14,7 +14,8 @@ export const waitListUser = pgTable("cook-waitlist", {
 export const userData = pgTable("userData",{
   id:varchar("id").primaryKey(),
   username:varchar("username").unique().notNull(),
-  // pointer:varchar("pointer").notNull(),
+  email:varchar("email").unique().notNull().default(""),
+  name:varchar("name").notNull().default(""),
   userTemplates:varchar("userTemplates").array().notNull().default([]),
   connectionKey:varchar("connectionKey").notNull().default("cook_connection_key_"+crypto.randomUUID()),
 })

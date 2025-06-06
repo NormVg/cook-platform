@@ -2,37 +2,36 @@ import axios from "axios";
 
 export default defineEventHandler(async (event) => {
   try {
-    const body = getQuery(event);
+    const body = await readBody(event);
 
     const runtimeConfig  = useRuntimeConfig()
 
 
-    if (!body || !body.username || !body.taoAccessToken || !body.taorRefreshToken) {
+    if (!body || !body.username || !body.taoAccessToken || !body.taoRefreshToken) {
       return { statusCode: 400, data: [], status: "args not found" }
     }
 
 
     const origin = `${getRequestProtocol(event)}://${getRequestHost(event)}`
 
-    console.log(origin);
 
 
     const options = {
       method: 'GET',
-      url: runtimeConfig.public.taoAuthURL,
+      url: `${runtimeConfig.public.taoAuthURL}/api/data/user`,
       params: {
         username: body.username,
-        taoAuth: runtimeConfig.public.taoAuth,
+        taoAuth: runtimeConfig.public.taoAuthToken,
         app: origin,
         accessToken: body.taoAccessToken,
-        refreshToken: body.taorRefreshToken
+        refreshToken: body.taoRefreshToken
       }
     };
 
 
       const { data } = await axios.request(options);
       console.log(data);
-      return { statusCode: 200, data: data, status: "good" };
+      return data //{ statusCode: 200, data: data, status: "good" };
 
 
 

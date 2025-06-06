@@ -28,9 +28,36 @@ export const useCheckAndCreateCookUser = async () => {
     }
   };
 
+
+  const getTaoUser = async () => {
+    const userTokens = await getLocalStorageToken();
+    const runtimeConfig = useRuntimeConfig();
+
+    const { data } = await useAsyncData("tao-user-data", () =>
+      $fetch("/api/app/user/tao-user", {
+        headers: {
+          "X-COOK-APP": "web",
+          "X-COOK-KEY": runtimeConfig.public.taoTokenWeb,
+        },
+        method: "POST",
+        body: {
+          username: userTokens.username,
+          taoAccessToken:userTokens.accessToken,
+          taoRefreshToken: userTokens.refreshToken,
+        },
+      })
+    );
+
+    console.log("Get Tao User Data", data.value);
+
+    return data.value.data;
+  }
+
   const CreateUser = async () => {
     const userTokens = await getLocalStorageToken();
     const runtimeConfig = useRuntimeConfig();
+
+    const taoUserData = await getTaoUser();
 
     const { data, pending, error } = await useAsyncData("CreateCookUser", () =>
       $fetch("/api/app/user/create", {
@@ -41,6 +68,8 @@ export const useCheckAndCreateCookUser = async () => {
         method: "POST",
         body: {
           username: userTokens.username,
+          email:taoUserData.email || 'none',
+          name: taoUserData.name || 'none',
         },
       })
     );

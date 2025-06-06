@@ -7,6 +7,8 @@ export default defineEventHandler(async (event) => {
     await db.insert(userData).values({
       id:"uid_" + crypto.randomUUID(),
       username:data.username,
+      email:data.email,
+      name:data.name,
       templatesUser:[]
     })
 
