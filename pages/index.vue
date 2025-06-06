@@ -1,18 +1,34 @@
-<script>
+<script setup>
+import { usePopupStore } from '~/store/popupStore';
 
 
+const isInitLoad = ref(false);
+const PopStore = usePopupStore()
+PopStore.setIsLoadedPop(true)
+isInitLoad.value = false;
+
+onMounted(() => {
+  setTimeout(() => {
+    isInitLoad.value = true;
+    PopStore.setIsLoadedPop(false)
+  }, 1500);
+});
 
 </script>
 
-<template >
-<Header/>
-<Hero/>
-<Waitlist/>
-<Features/>
-<About/>
-<Footer/>
+<template  >
+<div v-if="isInitLoad">
 
-<CustomCursor />
+  <Header />
+  <Hero/>
+  <Waitlist/>
+  <Features/>
+  <About/>
+  <Footer/>
+
+  <CustomCursor />
+
+</div>
 </template>
 
 <style scoped>

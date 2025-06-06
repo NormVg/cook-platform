@@ -1,9 +1,64 @@
 <script setup>
 import { SearchSlash } from "lucide-vue-next";
+import { useUserAllTemplates } from "~/composable/useTemplateData";
+import { useTemplateStore } from "~/store/templateDataStore";
+import { useFuse } from "@vueuse/integrations/useFuse";
+import { usePopupStore } from "~/store/popupStore";
+
+const SearchTextFiled = ref("");
+
+const popStore = usePopupStore()
+popStore.setIsLoadedPop(true)
+
+const templateStore = useTemplateStore();
+
+const CurrentTableData = computed(() => {
+  const templates = templateStore.allActiveTemplates;
+
+  const searchList = templates.map((item) => ({
+    item,
+    searchKey: `@${item.category}/${item.name}`,
+  }));
+
+  const searchData = searchList.map((entry) => entry.searchKey);
+
+  const { results } = useFuse(SearchTextFiled.value, searchData);
+
+  const matchedItems = results.value.map((res) => {
+    const match = searchList.find((entry) => entry.searchKey === res.item);
+    return match?.item;
+  });
+
+  if (!SearchTextFiled.value) return templates;
+
+  return matchedItems;
+});
+
+
+
+
+
+
+
+onMounted(async () => {
+
+  const { templates, pending } = await useUserAllTemplates();
+
+  templateStore.setUserTermplates(templates.value);
+  popStore.setIsLoadedPop(false)
+
+});
+
+
+
+
+
 
 const handleSelectionChange = (params) => {
-  console.log(params);
+  templateStore.setActiveTemplateType(params.value);
 };
+
+
 </script>
 
 <template>
@@ -15,16 +70,12 @@ const handleSelectionChange = (params) => {
     <div id="dt-bar">
       <div id="dtb-search">
         <SearchSlash />
-        <input type="text" placeholder="Search..." />
+        <input type="text" placeholder="Search..." v-model="SearchTextFiled" />
       </div>
 
       <div id="dtb-drop">
         <DropDownMenu
-          :options="[
-            { label: 'All', value: 'all' },
-            { label: 'Active', value: 'active' },
-            { label: 'Inactive', value: 'inactive' },
-          ]"
+          :options="templateStore.templateTypes"
           default-value="all"
           @change="handleSelectionChange"
         />
@@ -41,63 +92,11 @@ const handleSelectionChange = (params) => {
           </tr>
         </thead>
         <tbody>
-             <tr>
-          <td>@react/mongo-express-bun</td>
-          <td>react, mongo, express, bun</td>
-          <td class="dtb-btn"><ThreeDotMenu /></td>
-        </tr>
-        <tr>
-          <td>@Nuxt/primeui-pinia-betterauth</td>
-          <td>Nuxt, primeui, pinia, betterauth</td>
-          <td class="dtb-btn"><ThreeDotMenu /></td>
-        </tr>
-        <tr>
-          <td>@go/fiber-auth-postgres</td>
-          <td>go, fiber, auth, postgres</td>
-          <td class="dtb-btn"><ThreeDotMenu /></td>
-        </tr>
-
-        <tr>
-          <td>@go/fiber-auth-postgres</td>
-          <td>go, fiber, auth, postgres</td>
-          <td class="dtb-btn"><ThreeDotMenu /></td>
-        </tr>
-
-        <tr>
-          <td>@go/fiber-auth-postgres</td>
-          <td>go, fiber, auth, postgres</td>
-          <td class="dtb-btn"><ThreeDotMenu /></td>
-        </tr>
-
-        <tr>
-          <td>@go/fiber-auth-postgres</td>
-          <td>go, fiber, auth, postgres</td>
-          <td class="dtb-btn"><ThreeDotMenu /></td>
-        </tr>
-
-        <tr>
-          <td>@go/fiber-auth-postgres</td>
-          <td>go, fiber, auth, postgres</td>
-          <td class="dtb-btn"><ThreeDotMenu /></td>
-        </tr>
-
-        <tr>
-          <td>@go/fiber-auth-postgres</td>
-          <td>go, fiber, auth, postgres</td>
-          <td class="dtb-btn"><ThreeDotMenu /></td>
-        </tr>
-
-        <tr>
-          <td>@go/fiber-auth-postgres</td>
-          <td>go, fiber, auth, postgres</td>
-          <td class="dtb-btn"><ThreeDotMenu /></td>
-        </tr>
-
-        <tr>
-          <td>@go/fiber-auth-postgres</td>
-          <td>go, fiber, auth, postgres</td>
-          <td class="dtb-btn"><ThreeDotMenu /></td>
-        </tr>
+          <tr v-for="item in CurrentTableData" :key="item">
+            <td>@{{ item.category }}/{{ item.name }}</td>
+            <td>{{ item.stack.join(", ") }}</td>
+            <td class="dtb-btn"><ThreeDotMenu /></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -133,9 +132,6 @@ const handleSelectionChange = (params) => {
   border: 1px solid var(--border);
 }
 
-
-
-
 table {
   width: 100%;
   /* height: 100%; */
@@ -158,7 +154,7 @@ tr {
   border-bottom: 1px solid var(--border);
 }
 
-tbody{
+tbody {
   overflow-y: scroll;
 }
 

@@ -12,8 +12,8 @@ export default defineNuxtConfig({
 
       taoAuthToken :process.env.TAO_AUTH_TOKEN,
       taoAuthURL:process.env.TAO_AUTH_URL,
-      taoAuthCallback:process.env.TAO_AUTH_CALLBACK
-
+      taoAuthCallback:process.env.TAO_AUTH_CALLBACK,
+      taoTokenWeb:process.env.TAO_TOKEN_WEB
     }
   },
 

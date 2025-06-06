@@ -9,34 +9,26 @@ import logo from "~/assets/img/logo.svg";
     <img :src="logo" alt="cook logo" />
 
     <div id="nav-box">
-
       <NuxtLink to="/app">
-        <div class="nav-item">
-          APP
-        </div>
+        <div class="nav-item">APP</div>
       </NuxtLink>
 
-
-      <div class="nav-item" @click="scrollToElement('#feature-section')">FEATURES</div>
+      <div class="nav-item" @click="scrollToElement('#feature-section')">
+        FEATURES
+      </div>
 
       <div class="nav-item" @click="scrollToElement('#about-box')">ABOUT</div>
 
       <NuxtLink to="/login">
-       <div class="nav-item loginBtn">
-          LOGIN
-        </div>
+        <div class="nav-item loginBtn">LOGIN</div>
       </NuxtLink>
-
-
-
     </div>
   </div>
 </template>
 
 <style scoped>
-
-a{
-  text-decoration: none
+a {
+  text-decoration: none;
 }
 
 #header-box {
@@ -60,29 +52,27 @@ a{
   gap: 20px;
 }
 
-.nav-item{
+.nav-item {
   padding: 5px 10px;
   transition: 200ms all ease-in-out;
   font-weight: 500;
   cursor: pointer;
 }
 
-.nav-item:hover{
+.nav-item:hover {
   background-color: var(--green);
   color: var(--bg);
 }
 
-.loginBtn{
+.loginBtn {
   border: 1px solid var(--green);
   border-radius: 5px;
   color: var(--green);
 }
 
-
 @media (max-width: 640px) {
-.nav-item{
-  font-size: 14px;
+  .nav-item {
+    font-size: 14px;
+  }
 }
-}
-
 </style>

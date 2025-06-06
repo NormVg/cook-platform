@@ -5,9 +5,8 @@ export default defineEventHandler(async (event) => {
     const data = await readBody(event);
 
     await db.insert(userData).values({
-      id:crypto.randomUUID(),
+      id:"uid_" + crypto.randomUUID(),
       username:data.username,
-      pointer:data.pointer,
       templatesUser:[]
     })
 

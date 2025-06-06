@@ -6,9 +6,27 @@ import DFeedback from '~/components/DPage/DFeedback.vue';
 import DSettings from '~/components/DPage/DSettings.vue';
 import DSnippets from '~/components/DPage/DSnippets.vue';
 import DTemplate from '~/components/DPage/DTemplate.vue';
+import { useCheckAndCreateCookUser,useCookUser } from '~/composable/useCookUser';
 import { useDashboardStore } from '~/store/dashboardStore';
+import { useUserStore } from '~/store/userStore';
 
 const dashboardStore = useDashboardStore()
+const userStore = useUserStore()
+const {CookUserCheckFlow,} = await useCheckAndCreateCookUser()
+const {getCookUser}  = await useCookUser()
+
+
+onMounted(async () => {
+  const userTokenData = await getLocalStorageToken()
+  console.log(userTokenData.username);
+  userStore.setCurrentUsername(userTokenData.username)
+  await CookUserCheckFlow()
+  const cookUserData = await getCookUser()
+  console.log(cookUserData," cookUserData");
+
+  userStore.setCurrentCookUserData(cookUserData)
+
+})
 
 </script>
 

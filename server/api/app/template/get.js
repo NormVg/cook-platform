@@ -4,7 +4,7 @@ import { db, templateData } from "~/db/index";
 export default defineEventHandler(async (event) => {
   try {
 
-    const body = await getQuery(event)
+    const body = getQuery(event)
 
     // console.log(body.uid);
 

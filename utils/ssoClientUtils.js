@@ -106,7 +106,7 @@ const isUserLoggedin = async (TAO_AUTH_TOKEN,TAO_AUTH_CALLBACK,TAO_AUTH_URL) => 
 
 const logOutUser = async () => {
   await removeLocalStorageToken();
-  window.location.reload();
+  // window.location.reload();
 };
 
 const redirectToTaoSSO = async (TAO_AUTH_TOKEN  ,TAO_AUTH_CALLBACK ,TAO_AUTH_URL ) => {
@@ -143,5 +143,6 @@ export {
   setLocalStorageToken,
   validateAuthToken,
   refreshAuthToken,
-  isLocalStorageToken
+  isLocalStorageToken,
+  getLocalStorageToken
 };

@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
 
 
-  if (to.path === "/login") {
+  if (to.path.startsWith("/login") ) {
     if (process.client) {
 
       const isLoggendIN = await isUserLoggedin(
@@ -16,7 +16,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
 
       if (isLoggendIN) {
-        console.log(isLoggendIN, "logged in user");
+        console.log(isLoggendIN, "alredy logged in user");
         return await  navigateTo("/app")
       }
     }
@@ -38,7 +38,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
       if (!isLoggendIN) {
         console.log(isLoggendIN, "logged in user");
-        return await  navigateTo("/")
+        return await  navigateTo("/login")
       }
     }
   }

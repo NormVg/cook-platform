@@ -13,8 +13,11 @@
   "dependencies": {
     "@pinia/nuxt": "0.11.0",
     "@vueuse/core": "^13.2.0",
+    "@vueuse/integrations": "^13.3.0",
     "appwrite": "^18.1.1",
+    "axios": "^1.9.0",
     "drizzle-orm": "^0.43.1",
+    "fuse.js": "^7",
     "lucide-vue-next": "^0.511.0",
     "node-appwrite": "^17.0.0",
     "nuxt": "^3.17.4",
@@ -22,7 +25,8 @@
     "pinia": "^3.0.2",
     "tmp": "^0.2.3",
     "vue": "^3.5.14",
-    "vue-router": "^4.5.1"
+    "vue-router": "^4.5.1",
+    "vue3-marquee": "^4.2.2"
   },
   "packageManager": "pnpm@10.6.2+sha512.47870716bea1572b53df34ad8647b42962bc790ce2bf4562ba0f643237d7302a3d6a8ecef9e4bdfc01d23af1969aa90485d4cebb0b9638fa5ef1daef656f6c1b",
   "devDependencies": {

@@ -5,13 +5,13 @@ export default defineEventHandler(async (event) => {
   try {
     const data = await readBody(event);
 
-    if (!data || !data.uid || !data.templatesUser) {
+    if (!data || !data.uid || !data.userTemplates) {
       return { statusCode: 400, data: {}, status: "Invalid input" };
     }
 
     await db.update(userData)
       .set({
-        templatesUser: data.templatesUser,
+        userTemplates: data.userTemplates,
       })
       .where(eq(userData.id, data.uid));
 

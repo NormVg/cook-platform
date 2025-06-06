@@ -4,7 +4,6 @@ import { useDashboardStore } from "~/store/dashboardStore";
 import { computed } from "vue";
 
 import {
-  LogOut,
   LayoutPanelTop,
   SquareDashedBottomCode,
   Key,
@@ -33,6 +32,13 @@ const cstyle = computed(() => {
 
   return d;
 });
+
+
+// const logOutClient = async () => {
+// await logOutUser()
+// await navigateTo("/")
+// }
+
 </script>
 
 <template>
@@ -97,14 +103,7 @@ const cstyle = computed(() => {
         <div>Feedback</div>
       </div>
 
-      <div
-        class="dash-sidebar-item"
 
-        @click="logOutUser()"
-      >
-        <LogOut />
-        <div>Logout</div>
-      </div>
     </div>
   </Transition>
 </template>
@@ -153,6 +152,7 @@ const cstyle = computed(() => {
 
 #dash-sidebar {
   width: 20%;
+  /* z-index: 10; */
   height: calc(98vh - 40px);
   /* border: 1px solid var(--white); */
   background-color: var(--bg2);

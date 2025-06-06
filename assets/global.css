@@ -7,6 +7,8 @@
   --card-bg:#1A1A1A;
 
   --bg2: #1A1A1A;
+  --bg3: #333;
+  --bg4: #1f1f1f;
   --fg2:#b4b4b4;
 
 
@@ -26,10 +28,13 @@
   --font-k2d:"K2D", sans-serif;
   --font-mont: "Montserrat", sans-serif;
   --font-ital:"Italianno", cursive;
+
+
 }
 
 *{
   color: var(--white);
+  transition: all ease-in-out 200ms;
 
 }
 

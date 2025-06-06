@@ -1,11 +1,11 @@
 meta {
-  name: update
+  name: updateTempUser
   type: http
   seq: 4
 }
 
 post {
-  url: http://localhost:3000/api/app/user/update
+  url: {{BASE}}/api/app/user/updateTempUser
   body: json
   auth: inherit
 }

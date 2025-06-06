@@ -1,6 +1,7 @@
 <script setup>
 import { PanelLeft } from "lucide-vue-next";
 import { useDashboardStore } from "~/store/dashboardStore";
+import { useUserStore } from "~/store/userStore";
 
 const dashboardStore = useDashboardStore();
 
@@ -10,6 +11,8 @@ const props = defineProps({
     type: String,
   },
 });
+
+const userDataStore = useUserStore()
 </script>
 
 <template>
@@ -24,13 +27,11 @@ const props = defineProps({
         <PanelLeft v-else color="#A8A7AC" />
       </div>
 
-      {{ props.username }}
+      {{ userDataStore.currentUsername }}
     </div>
 
     <div id="nav-links">
-      <!-- <NuxtLink to="/app" class="nav-link">
-            Home
-          </NuxtLink> -->
+      <NuxtLink to="/" class="nav-link"> Home </NuxtLink>
 
       <NuxtLink to="/app" class="nav-link"> Docs </NuxtLink>
 
