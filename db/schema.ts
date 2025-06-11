@@ -1,6 +1,6 @@
 
 
-import { pgTable, varchar } from "drizzle-orm/pg-core";
+import { pgTable, varchar,integer,boolean } from "drizzle-orm/pg-core";
 
 
 
@@ -16,7 +16,6 @@ export const userData = pgTable("userData",{
   username:varchar("username").unique().notNull(),
   email:varchar("email").unique().notNull().default(""),
   name:varchar("name").notNull().default(""),
-  userTemplates:varchar("userTemplates").array().notNull().default([]),
   connectionKey:varchar("connectionKey").notNull().default("cook_connection_key_"+crypto.randomUUID()),
 })
 
@@ -30,7 +29,13 @@ export const templateData = pgTable("template-data",{
   stack: varchar("stack").array().notNull(),
   github: varchar("github").notNull(),
   version: varchar("version").notNull(),
-  fileID:varchar("file-id").notNull()
+  fileID:varchar("file-id").notNull(),
+  stars:integer('stars').notNull().default(0),
+  public:boolean('public').notNull().default(false),
+  info:varchar('info').notNull().default("template info"),
+  downloads:integer('downloads').notNull().default(0)
+
+
 })
 
 

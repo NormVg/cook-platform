@@ -19,6 +19,7 @@ export default defineEventHandler(async (event) => {
       github,
       version,
       fileID,
+      
     });
 
     return { statusCode: 200, data: data, status: "good" };

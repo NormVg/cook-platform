@@ -33,6 +33,13 @@ const validateAppKey =  async (key: String) => {
 
 }
 
+const getFileBucketData = async (file_id:String) => {
+ return  await db.select().from(fileBucket).where(eq(fileBucket.id,file_id))
+}
 
 
-export {db,waitListUser,templateData,userData,fileBucket,validateAppKey}
+const removeFromFileBucketData = async (file_id:String) => {
+  await db.delete(fileBucket).where(eq(fileBucket.id,file_id))
+}
+
+export {db,waitListUser,templateData,userData,fileBucket,validateAppKey,getFileBucketData,removeFromFileBucketData}

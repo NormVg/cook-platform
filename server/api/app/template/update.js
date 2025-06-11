@@ -7,29 +7,16 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
 
 
-    if (!body || !body.uid || !body.name || !body.category || !body.date  || !body.stack || !body.github || !body.version || !body.fileID) {
+    if (!body || !body.uid ) {
       return { statusCode: 400, data: {}, status: "Invalid input" };
     }
 
+    const { uid, ...updateData } = body;
 
-    await db.update(templateData).set(
-      {
-          name: body.name,
-          category: body.category,
-          date: body.date,
-          stack: body.stack,
-          github: body.github,
-          version: body.version,
-          fileID: body.fileID
-      }
-    ).where(
-      eq(templateData.id,body.uid)
+    await db.update(templateData).set(updateData).where(
+      eq(templateData.id,uid)
     )
 
-
-    // if (termplateInfo.length === 0){
-    //   return { statusCode: 404, data: {}, status: "not found" };
-    // }
 
     return { statusCode: 200, data: {}, status: "good" };
   } catch (error) {

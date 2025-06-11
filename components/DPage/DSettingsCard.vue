@@ -34,11 +34,10 @@ font-size: 15px;
 
 }
 
-.settings-card:hover{
+/* .settings-card:hover{
 border: 1px solid var(--border);
 
-
-}
+} */
 
 .scard-title{
   font-size: 23px;
