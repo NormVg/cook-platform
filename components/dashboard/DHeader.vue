@@ -31,7 +31,7 @@ const userDataStore = useUserStore()
     </div>
 
     <div id="nav-links">
-      <NuxtLink to="/" class="nav-link"> Home </NuxtLink>
+      <NuxtLink to="/?next=false" class="nav-link"> Home </NuxtLink>
 
       <NuxtLink to="/app" class="nav-link"> Docs </NuxtLink>
 

@@ -1,16 +1,132 @@
 <script setup>
-import { SearchSlash } from "lucide-vue-next";
-import { useUserAllTemplates } from "~/composable/useTemplateData";
+import { useTemplateData, useUserAllTemplates } from "~/composable/useTemplateData";
 import { useTemplateStore } from "~/store/templateDataStore";
 import { useFuse } from "@vueuse/integrations/useFuse";
 import { usePopupStore } from "~/store/popupStore";
+import { useBucketData } from "~/composable/useBucketData";
+
+
 
 const SearchTextFiled = ref("");
+
+const templateStore = useTemplateStore();
+
 
 const popStore = usePopupStore()
 popStore.setIsLoadedPop(true)
 
-const templateStore = useTemplateStore();
+const DotMenuOptions = [
+  { id: 'open', label: 'Open', action: 'handleOpen' },
+  { id: 'share', label: 'Share', action: 'handleShare' },
+  { id: 'toggleAccess', label: 'Toggle Access', action: 'handleToggleAccess' },
+  { id: 'download', label: 'Download', action: 'handleDownload' },
+  { id: 'delete', label: 'Delete', action: 'handleDelete' }
+];
+
+function handleOpen(item) {
+  // window.location.href = `/template?uid=${item.id}`;
+
+  window.open(`${window.location.origin}/template?uid=${item.id}`, '_blank', 'noopener,noreferrer');
+
+}
+
+function handleShare(item) {
+  navigator.clipboard.writeText(`${window.location.origin}/template?uid=${item.id}`);
+}
+
+
+
+
+async function handleToggleAccess(item) {
+  console.log("doing v1");
+
+
+  const {updateTemplate} = await useTemplateData()
+  await updateTemplate(
+    {
+      uid:item.id,
+      public:!item.public
+    }
+  )
+  console.log("doing v2");
+
+  window.location.reload()
+
+
+}
+
+async function handleDownload(item) {
+  const {downloadBucketFile} = await useBucketData()
+  const {response} =  await downloadBucketFile(item.fileID)
+  console.log(response.value);
+
+  if (response.value) {
+    window.open(response.value, '_blank', 'noopener,noreferrer');
+  }
+}
+
+async function handleDelete(item) {
+
+  popStore.setDeletePopData({
+    head:"Delete Template",
+    v1:item.id
+  })
+  popStore.setIsDeletePop(true)
+
+
+
+  while (popStore.deletePopResp === null) {
+    console.log('asd');
+
+    await new Promise(resolve => setTimeout(resolve, 100));
+  }
+
+  if (popStore.deletePopResp) {
+    const {deleteTemplate}  = await useTemplateData()
+    await deleteTemplate(item.id)
+    console.log("haa bhaai template delete");
+
+
+    window.location.reload()
+
+
+  }
+  popStore.setDeletePopResp(null)
+  popStore.setDeletePopData({
+    head:"Delete",
+    v1:""
+  })
+  popStore.setIsDeletePop(false)
+
+}
+
+const handleMenuAction = async ({action,item}) => {
+  // console.log(props);
+
+
+  switch (action) {
+    case 'handleOpen':
+      handleOpen(item);
+      break;
+    case 'handleShare':
+      handleShare(item);
+      break;
+    case 'handleToggleAccess':
+      await handleToggleAccess(item);
+      break;
+    case 'handleDownload':
+      await handleDownload(item);
+      break;
+    case 'handleDelete':
+      await handleDelete(item);
+      break;
+    default:
+      break;
+  }
+};
+
+
+
 
 const CurrentTableData = computed(() => {
   const templates = templateStore.allActiveTemplates;
@@ -42,7 +158,7 @@ const CurrentTableData = computed(() => {
 
 onMounted(async () => {
 
-  const { templates, pending } = await useUserAllTemplates();
+  const { templates } = await useUserAllTemplates();
 
   templateStore.setUserTermplates(templates.value);
   popStore.setIsLoadedPop(false)
@@ -88,14 +204,21 @@ const handleSelectionChange = (params) => {
           <tr>
             <th>Name</th>
             <th>Stack</th>
+            <th>Access</th>
             <th>More</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in CurrentTableData" :key="item">
-            <td>@{{ item.category }}/{{ item.name }}</td>
+            <td>
+              <a :href="`/template?uid=`+item.id">
+                @{{ item.category }}/{{ item.name }}
+              </a>
+            </td>
             <td>{{ item.stack.join(", ") }}</td>
-            <td class="dtb-btn"><ThreeDotMenu /></td>
+            <td v-if="item.public" class="access-item-public">public</td>
+            <td v-else class="access-item-private">private</td>
+            <td class="dtb-btn"><ThreeDotMenu :items="DotMenuOptions" @action="handleMenuAction" :comp="item"/></td>
           </tr>
         </tbody>
       </table>
@@ -107,6 +230,25 @@ const handleSelectionChange = (params) => {
 /* * {
   border: 1px solid salmon;
 } */
+
+.access-item-public{
+  color: var(--green);
+}
+
+
+.access-item-private{
+  color: var(--pink);
+}
+
+a{
+  text-decoration: none;
+  border-bottom:1px solid transparent ;
+
+}
+
+a:hover{
+  border-bottom:1px solid var(--red) ;
+}
 
 #dt-box {
   padding: 5px 20px;

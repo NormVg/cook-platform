@@ -13,7 +13,8 @@ import { waitListUser,templateData,userData,fileBucket } from "~/db/schema";
 
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
+import download from "~/server/api/bucket/download";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -42,4 +43,8 @@ const removeFromFileBucketData = async (file_id:String) => {
   await db.delete(fileBucket).where(eq(fileBucket.id,file_id))
 }
 
-export {db,waitListUser,templateData,userData,fileBucket,validateAppKey,getFileBucketData,removeFromFileBucketData}
+
+const addToTemplateDownloads = async (uid:String) => {
+  await db.update(templateData).set({downloads:sql`${templateData.downloads} + 1`}).where(eq(templateData.id,uid))
+}
+export {db,waitListUser,templateData,userData,fileBucket,validateAppKey,getFileBucketData,removeFromFileBucketData,addToTemplateDownloads}

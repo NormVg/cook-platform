@@ -6,8 +6,22 @@ export default defineEventHandler(async (event) => {
 
     // console.log(data);
 
-    const { id, name, category, date, author, stack, github, version, fileID } =
-      data;
+    const { id, name, category, date, author, stack, github, version,info, fileID } = data;
+
+
+
+    let templateInfo = info;
+    if (!templateInfo) {
+      templateInfo = `
+  # ${"Template: "+name || "Template"}
+  - **Category:** ${category || "N/A"}
+  - **Date:** ${date || "N/A"}
+  - **Author:** ${author || "N/A"}
+  - **Stack:** ${stack || "N/A"}
+  - **GitHub:** ${github || "N/A"}
+  - **Version:** ${version || "N/A"}
+  `
+    }
 
     await db.insert(templateData).values({
       id,
@@ -19,7 +33,7 @@ export default defineEventHandler(async (event) => {
       github,
       version,
       fileID,
-      
+      info: templateInfo
     });
 
     return { statusCode: 200, data: data, status: "good" };
