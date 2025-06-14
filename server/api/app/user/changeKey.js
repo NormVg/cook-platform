@@ -6,11 +6,11 @@ export default defineEventHandler(async (event) => {
     const body = getQuery(event);
 
 
-    if (!body || !body.uid) {
+    if (!body || !body.uid || !body.username || !body.email ) {
       return { statusCode: 400, data: [], status: "args not found" };
     }
 
-    const newKey = `cook_connection_key_${crypto.randomUUID()}${new Date().toISOString()}`
+    const newKey = `cook_connection_key_${crypto.randomUUID()}${new Date().toISOString()}_${body.username}_${body.email}` // `cook_connection_key_${crypto.randomUUID()}${new Date().toISOString()}`
 
     await db
       .update(userData)

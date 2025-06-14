@@ -128,7 +128,7 @@ export const useCookUser = async () => {
 
 
     const { data, pending, error } = await useAsyncData("renewCookUserKey", () =>
-      $fetch("/api/app/user/changeKey?uid="+userDataStore.currentCookUserData.id, {
+      $fetch("/api/app/user/changeKey?uid="+userDataStore.currentCookUserData.id+"&username="+userDataStore.currentCookUserData.username+"&email="+userDataStore.currentCookUserData.email, {
         headers: {
           "X-COOK-APP": "web",
           "X-COOK-KEY": runtimeConfig.public.taoTokenWeb,
