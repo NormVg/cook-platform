@@ -28,12 +28,15 @@ export const useUserAllTemplates = async () => {
 export const useTemplateData = async () => {
 
   const getTemplateData = async (uid) => {
+
+    const userTokens = await getLocalStorageToken();
     const runtimeConfig = useRuntimeConfig();
 
-    const { data, pending, error } = await useAsyncData(
-      "template-data-by-id",
+    if (userTokens.username === uid.split('/')[0]) {
+      const { data, pending, error } = await useAsyncData(
+      "template-data-by-id-user",
       () =>
-        $fetch("/api/app/template/get?uid=" + uid, {
+        $fetch("/api/app/template/get?uid=" + uid+"&username="+userTokens.username, {
           headers: {
             "X-COOK-APP": "web",
             "X-COOK-KEY": runtimeConfig.public.taoTokenWeb,
@@ -55,6 +58,35 @@ export const useTemplateData = async () => {
       pending,
       error,
     };
+    }else{
+          const { data, pending, error } = await useAsyncData(
+      "template-data-by-id-public",
+      () =>
+        $fetch("/api/app/template/public-get?uid=" + uid, {
+          headers: {
+            "X-COOK-APP": "web",
+            "X-COOK-KEY": runtimeConfig.public.taoTokenWeb,
+          },
+        })
+    );
+
+    console.log(data.value);
+
+    // Optional logging for development
+    if (error.value) {
+      console.error("Failed to fetch templates:", error.value);
+    }
+
+    const response = computed(() => data.value.data ?? []);
+
+    return {
+      response,
+      pending,
+      error,
+    };
+    }
+
+
   };
 
   const getAllUserTemplates = async () => {

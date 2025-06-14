@@ -45,7 +45,16 @@ const logOutClient = async () => {
 
     <DSettingsCard title="CLI Connection Key">
       <div id="key-comp">
-        {{ UserStore.currentCookUserData.connectionKey }}
+        {{ UserStore.currentCookUserData.connectionKey
+          ? UserStore.currentCookUserData.connectionKey.slice(0, 25) +
+            '*'.repeat(
+              Math.min(
+                45,
+                UserStore.currentCookUserData.connectionKey.length - 25
+              )
+            )
+          : ''
+        }}
       </div>
 
       <div id="kc-btns">
@@ -87,6 +96,8 @@ const logOutClient = async () => {
   padding: 5px 10px;
   border-radius: 5px;
   background-color: var(--bg2);
+  /* max-width: 20%; */
+
 }
 
 #kc-btns {
