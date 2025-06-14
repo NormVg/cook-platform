@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
       return { statusCode: 400, data: [], status: "args not found" };
     }
 
-    const newKey = "cook_connection_key_"+crypto.randomUUID()
+    const newKey = `cook_connection_key_${crypto.randomUUID()}${new Date().toISOString()}`
 
     await db
       .update(userData)

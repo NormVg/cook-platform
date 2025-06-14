@@ -16,7 +16,7 @@ export const userData = pgTable("userData",{
   username:varchar("username").unique().notNull(),
   email:varchar("email").unique().notNull().default(""),
   name:varchar("name").notNull().default(""),
-  connectionKey:varchar("connectionKey").notNull().default("cook_connection_key_"+crypto.randomUUID()),
+  connectionKey:varchar("connectionKey").notNull(),
 })
 
 

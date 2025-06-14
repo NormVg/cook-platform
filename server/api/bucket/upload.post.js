@@ -24,7 +24,7 @@ const runtimeConfig = useRuntimeConfig()
     const uploadResponse = await uploadFileToAppwrite(tempFilePath, file.filename,runtimeConfig.appWriteProject,runtimeConfig.appWriteBucket,runtimeConfig.appWriteKey);
 
     const fileUploadedID = uploadResponse.$id
-    const dbFileID = crypto.randomUUID()
+    const dbFileID = `cook_file_bucket_${crypto.randomUUID()}${new Date().toISOString()}`
 
 
     await db.insert(fileBucket).values({

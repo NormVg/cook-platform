@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
     }
 
     const newEntry = {
-      "id": crypto.randomUUID(),
+      "id": `cook_waitlist_${crypto.randomUUID()}${new Date().toISOString()}`,
       "email": body.email,
       "type":body.type,
       "datetime": new Date().toISOString(),

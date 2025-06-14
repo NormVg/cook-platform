@@ -8,7 +8,15 @@ export default defineEventHandler(async (event) => {
 
     // console.log(body.uid);
 
-    const termplateInfo = await db.select().from(templateData).where(eq(templateData.id,body.uid)).where(eq(templateData.author,body.username))
+    const termplateInfo = await db
+      .select()
+      .from(templateData)
+      .where(
+        eq(templateData.id, body.uid)
+      )
+      .where(
+        eq(templateData.public, true)
+      );
     console.log( termplateInfo);
 
     if (termplateInfo.length === 0){

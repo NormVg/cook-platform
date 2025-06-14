@@ -5,11 +5,11 @@ export default defineEventHandler(async (event) => {
     const data = await readBody(event);
 
     await db.insert(userData).values({
-      id:"uid_" + crypto.randomUUID(),
+      id:`cook_user_${crypto.randomUUID()}${new Date().toISOString()}`,
       username:data.username,
       email:data.email,
       name:data.name,
-      templatesUser:[]
+      connectionKey:`cook_connection_key_${crypto.randomUUID()}${new Date().toISOString()}_${data.username}_${data.email}`
     })
 
     return { statusCode: 200, data: data, status: "good" };
