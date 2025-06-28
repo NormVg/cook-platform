@@ -1,6 +1,11 @@
 import { isUserLoggedin } from "~/utils/ssoClientUtils";
 
 export default defineNuxtRouteMiddleware(async (to) => {
+
+  if (to.path === "/"){
+    return
+  }
+
   if (process.client) {
     const config = useRuntimeConfig();
     const { taoAuthToken, taoAuthCallback, taoAuthURL } = config.public;

@@ -1,42 +1,74 @@
-<script setup></script>
+<script setup>
+import { motion as m } from 'motion-v';
+
+
+
+
+</script>
 
 <template>
   <div id="about-box">
     <div id="about-head">Cook - The All-in-One CLI for Lazy Devs</div>
 
-    <div id="about-sub">
+    <m.div id="about-sub"
+    :initial="{filter:'blur(10px)',y:20,opacity:0}"
+    :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+    :transition="{delay:.15}"
+    :in-view-options="{amount:1,once:true}"
+    >
       **Cook** is a powerful, extensible CLI tool designed to streamline and
       automate everyday development tasks. Whether you're setting up a new
       project, managing boilerplate code, running repetitive commands, or
       tunneling a local server — Cook brings it all together in one elegant
       toolkit. Built for developers who prefer building over boilerplate, it
       helps you move faster with less setup and more shipping.
-    </div>
+    </m.div>
 
     <div id="about-item-box">
       <div class="ab-item i1">
         <div class="abi-head">What Cook Offers (v1)</div>
 
         <div class="abi-sub">
-          <p>
+          <m.p
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+          >
             <strong>CLI:</strong> The core command-line app powering all Cook
             features.
-          </p>
+          </m.p>
 
-          <p>
+          <m.p
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+          >
             <strong>Project Templates:</strong> Easily create and reuse complete
             project structures.
-          </p>
+          </m.p>
 
-          <p>
+          <m.p
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+          >
             <strong>License Generator:</strong> Instantly generate open-source
             licenses for your projects.
-          </p>
+          </m.p>
 
-          <p>
+          <m.p
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+
+          >
             <strong>Online Platform:</strong> Sync, share, and discover
             templates and snippets with the community.
-          </p>
+          </m.p>
         </div>
       </div>
 
@@ -44,32 +76,54 @@
         <div class="abi-head">Architecture Overview</div>
 
         <div class="abi-sub">
-          <p>
+          <m.p
+
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+          >
             <span><strong>1. CLI Tool</strong></span
             ><br />
             Handles CRUD operations for templates, snippets, commands, layers,
             tunnels, and more.
-          </p>
+          </m.p>
 
-          <p>
+          <m.p
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+          >
             <span><strong>2. Local Web Interface</strong></span
             ><br />
             Runs alongside the CLI to provide a clean, browser-based GUI.
-          </p>
+          </m.p>
 
-          <p>
+          <m.p
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+          >
             <span><strong>3. Public Platform</strong></span
             ><br />
             Hosts and syncs shared templates, API keys, and code snippets with
             version control.
-          </p>
+          </m.p>
 
-          <p>
+          <m.p
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+
+          >
             <span><strong>4. MCP Server</strong></span
             ><br />
             Advanced features to connect with context-aware services, discover
             plugins, and share infrastructure.
-          </p>
+          </m.p>
         </div>
       </div>
 
@@ -77,30 +131,59 @@
         <div class="abi-head">Who is it for?</div>
 
         <div class="abi-sub">
-          <p>• Solo developers managing multiple side projects.</p>
+          <m.p
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+          >• Solo developers managing multiple side projects.</m.p>
 
-          <p>• Teams looking to standardize and reuse development workflows.</p>
+          <m.p
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+          >• Teams looking to standardize and reuse development workflows.</m.p>
 
-          <p>
+          <m.p
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+          >
             • Open-source contributors who need consistent project structure.
-          </p>
+          </m.p>
 
-          <p>
+          <m.p
+          :initial="{filter:'blur(10px)',y:20,opacity:0}"
+          :while-in-view="{filter:'blur(0px)',y:0,opacity:1 }"
+          :transition="{delay:.15}"
+          :in-view-options="{amount:1,once:true}"
+          >
             • Anyone tired of repeating the same boilerplate and setup tasks.
-          </p>
+          </m.p>
         </div>
       </div>
     </div>
 
-    <div id="about-foot">
+    <div id="about-foot"
+
+
+    >
       <div id="af-head">Early Access</div>
 
-      <div id="af-sub">
+      <m.div id="af-sub"
+          :initial="{filter:'blur(10px)',opacity:0,x:-10}"
+    :while-in-view="{filter:'blur(0px)',opacity:1,x:0 }"
+    :transition="{delay:.15}"
+    :in-view-options="{amount:1,once:true}"
+
+      >
         We're currently building the v1 version and accepting users to our
         <span @click="scrollToElement('#waitlist-box')">waitlist</span>.
         Join up early to shape the future of Cook and get access tp internal
         builds, feedback loops, and plugin dev guides.
-      </div>
+      </m.div>
     </div>
   </div>
 </template>

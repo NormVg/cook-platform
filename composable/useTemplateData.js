@@ -44,7 +44,7 @@ export const useTemplateData = async () => {
         })
     );
 
-    console.log(data.value);
+    console.log("from user");
 
     // Optional logging for development
     if (error.value) {
@@ -69,8 +69,9 @@ export const useTemplateData = async () => {
           },
         })
     );
+    console.log("from public");
 
-    console.log(data.value);
+    // console.log(data.value);
 
     // Optional logging for development
     if (error.value) {

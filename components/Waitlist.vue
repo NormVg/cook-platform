@@ -1,4 +1,6 @@
 <script setup>
+import {  motion } from 'motion-v';
+
 const email = ref("");
 
 const selected = ref(1);
@@ -45,49 +47,83 @@ const waitlistJoin = async () => {
   console.log(data);
   alert("added you to waitlist");
 };
+
 </script>
 
 <template>
-  <div id="waitlist-box">
+
+  <motion.div id="waitlist-box"
+    :initial="{ opacity: 0,   filter: 'blur(15px)' }"
+    :while-in-view="{ opacity: 1,  filter: 'blur(0px)' }"
+    :in-view-options="{ once: true , amount:0.9}"
+
+  >
     <h2>JOIN THE WAITLIST</h2>
 
-    <div id="email-box">
+    <motion.div id="email-box"
+    :initial="{ opacity: 0, }"
+    :while-in-view="{ opacity: 1}"
+    :in-view-options="{ once: true,amount:1 }"
+    :transition="{delay:0.7}"
+
+    >
       <div>email <span>$</span></div>
       <input type="text" v-model="email" />
-    </div>
+    </motion.div>
 
     <div id="check-box">
-      <div class="check-item" @click="changeSelected(0);">
+      <motion.div class="check-item" @click="changeSelected(0);"
+
+    :initial="{ opacity: 0, y:-10, }"
+    :while-in-view="{ opacity: 1,y:0 }"
+    :in-view-options="{ once: true,amount:1 }"
+    :transition="{delay:.8}"
+      >
         <span id="wait-select" :style="cstyle[0]">></span> [A] Beginner (I burn
         water)
-      </div>
+      </motion.div>
 
-      <div class="check-item" @click="changeSelected(1);" >
+      <motion.div class="check-item" @click="changeSelected(1);"
+      :initial="{ opacity: 0, y:-10, }"
+    :while-in-view="{ opacity: 1,y:0 }"
+    :in-view-options="{ once: true,amount:1 }"
+    :transition="{delay:0.9}"
+      >
         <span id="wait-select" :style="cstyle[1]">></span> [B] Intermediate (I
         can follow recipes)
-      </div>
+      </motion.div>
 
-      <div class="check-item" @click="changeSelected(2);">
+      <motion.div class="check-item" @click="changeSelected(2);"
+
+      :initial="{ opacity: 0, y:-10, }"
+    :while-in-view="{ opacity: 1,y:0 }"
+    :in-view-options="{ once: true,amount:1 }"
+    :transition="{delay:1}"
+      >
         <span id="wait-select" :style="cstyle[2]">></span> [C] Advanced (I
         experiment with recipes)
-      </div>
+      </motion.div>
     </div>
 
     <div id="join-btn" @click="waitlistJoin()">JOIN</div>
-  </div>
+  </motion.div>
+
 </template>
 
 <style scoped>
 #waitlist-box {
   background-color: var(--bg2);
   margin: 50px auto;
-  width: 50vw;
+  /* width: 50vw; */
   padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 25px;
+  margin-top: 200px;
+  margin-bottom: 200px;
+
   border-radius: 5px;
 }
 

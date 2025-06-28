@@ -4,6 +4,7 @@ import { useTemplateStore } from "~/store/templateDataStore";
 import { useFuse } from "@vueuse/integrations/useFuse";
 import { usePopupStore } from "~/store/popupStore";
 import { useBucketData } from "~/composable/useBucketData";
+import { SearchSlash } from "lucide-vue-next";
 
 
 
@@ -211,11 +212,11 @@ const handleSelectionChange = (params) => {
         <tbody>
           <tr v-for="item in CurrentTableData" :key="item">
             <td>
-              <a :href="`/template?uid=`+item.id">
+              <a :href="`/template?uid=`+item.id" :title="`@${item.category}/${item.name}`">
                 @{{ item.category }}/{{ item.name }}
               </a>
             </td>
-            <td>{{ item.stack.join(", ") }}</td>
+            <td class="stack-list" :title="item.stack.join(', ')">{{ item.stack.join(", ") }}</td>
             <td v-if="item.public" class="access-item-public">public</td>
             <td v-else class="access-item-private">private</td>
             <td class="dtb-btn"><ThreeDotMenu :items="DotMenuOptions" @action="handleMenuAction" :comp="item"/></td>
@@ -230,6 +231,13 @@ const handleSelectionChange = (params) => {
 /* * {
   border: 1px solid salmon;
 } */
+
+.stack-list{
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
 .access-item-public{
   color: var(--green);

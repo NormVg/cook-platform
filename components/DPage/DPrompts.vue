@@ -4,7 +4,7 @@
 <template>
   <div class="soon-wrapper">
     <div class="soon-box">
-      <div class="soon-line">key manager</div>
+      <div class="soon-line">prompts book</div>
       <div class="soon-subtle">coming soon</div>
     </div>
     <div class="construction-tape"></div>

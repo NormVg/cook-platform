@@ -1,5 +1,11 @@
 <template>
-  <div class="terminal">
+  <motion.div class="terminal"
+    :initial="{ opacity: 0, x: 0, scale: 1, filter: 'blur(12px)' }"
+    :animate="{ opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' }"
+    :transition="{ type: 'spring', stiffness: 120, damping: 14 ,delay:0.2}"
+    :in-view-options="{ once: true }"
+
+  >
     <div class="terminal-content">
       <div class="command-line" v-for="(line, index) in visibleLines" :key="index">
         <template v-if="line.type === 'command'">
@@ -35,10 +41,11 @@
         </button>
       </div>
     </div>
-  </div>
+  </motion.div>
 </template>
 
 <script setup>
+import { motion } from 'motion-v'
 import { ref, onMounted } from 'vue'
 
 const lines = [
@@ -138,7 +145,10 @@ function replayAnimation() {
 }
 
 function startAnimation() {
-  animateNextLine()
+  setTimeout(() => {
+    animateNextLine()
+  }, 400)
+  return
 }
 
 onMounted(() => {

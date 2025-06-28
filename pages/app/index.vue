@@ -3,6 +3,7 @@ import Dashboard from '~/components/dashboard/Dashboard.vue';
 import DApikeys from '~/components/DPage/DApikeys.vue';
 import DExplore from '~/components/DPage/DExplore.vue';
 import DFeedback from '~/components/DPage/DFeedback.vue';
+import DPrompts from '~/components/DPage/DPrompts.vue';
 import DSettings from '~/components/DPage/DSettings.vue';
 import DSnippets from '~/components/DPage/DSnippets.vue';
 import DTemplate from '~/components/DPage/DTemplate.vue';
@@ -40,6 +41,6 @@ onMounted(async () => {
 <DExplore v-if="dashboardStore.nowDashboardTab === 'explore'"   />
 <DFeedback v-if="dashboardStore.nowDashboardTab === 'feedback'"  />
 
-
+<DPrompts v-if="dashboardStore.nowDashboardTab === 'prompts'"/>
 </Dashboard>
 </template>

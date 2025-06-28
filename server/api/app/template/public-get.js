@@ -17,7 +17,6 @@ export default defineEventHandler(async (event) => {
       .where(
         eq(templateData.public, true)
       );
-    console.log( termplateInfo);
 
     if (termplateInfo.length === 0){
       return { statusCode: 404, data: {}, status: "not found" };

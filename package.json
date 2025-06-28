@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "pg": "drizzle-kit studio",
-    "loc":"cloc  $(git ls-files)"
+    "loc": "cloc  $(git ls-files)"
   },
   "dependencies": {
     "@nuxt/content": "^3.5.1",
@@ -24,6 +24,7 @@
     "highlight.js": "^11.11.1",
     "lucide-vue-next": "^0.511.0",
     "marked": "^15.0.12",
+    "motion-v": "^1.2.1",
     "node-appwrite": "^17.0.0",
     "nuxt": "^3.17.4",
     "pg": "^8.16.0",

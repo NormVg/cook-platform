@@ -1,29 +1,38 @@
 <script setup>
 import logo from "~/assets/img/logo.svg";
-
+import { useInView, motion } from "motion-v"
 // import { scrollToElement } from "~/utils/scrollView.js";
+
+
 </script>
 
 <template>
-  <div id="header-box">
-    <img :src="logo" alt="cook logo" />
+  <motion.div id="header-box">
+    <motion.img :src="logo" alt="cook logo"
 
-    <div id="nav-box">
+    :initial="{ opacity: 0, y:-50,  filter: 'blur(12px)' }"
+    :animate="{ opacity: 1,y:0,  filter: 'blur(0px)' }"
+    :transition="{  delay: 0.1, duration:0.3 }"
+    />
+
+    <motion.div id="nav-box"
+    :initial="{ opacity: 0, y: -50,  filter: 'blur(15px)' }"
+        :animate="{ opacity: 1, y: 0,  filter: 'blur(0px)' }"
+        :transition="{  delay: 0.2 , duration:0.3}"
+    >
       <NuxtLink to="/app">
-        <div class="nav-item">APP</div>
+      <div class="nav-item">APP</div>
       </NuxtLink>
 
-      <div class="nav-item" @click="scrollToElement('#feature-section')">
-        FEATURES
-      </div>
+      <div class="nav-item" @click="scrollToElement('#feature-section')">FEATURES</div>
 
       <div class="nav-item" @click="scrollToElement('#about-box')">ABOUT</div>
 
       <NuxtLink to="/login">
-        <div class="nav-item loginBtn">LOGIN</div>
+      <div class="nav-item loginBtn">LOGIN</div>
       </NuxtLink>
-    </div>
-  </div>
+    </motion.div>
+  </motion.div>
 </template>
 
 <style scoped>

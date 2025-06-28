@@ -9,7 +9,6 @@ export default defineEventHandler(async (event) => {
     // console.log(body.uid);
 
     const termplateInfo = await db.select().from(templateData).where(eq(templateData.author,body.username))
-    console.log( termplateInfo);
 
     if (termplateInfo.length === 0){
       return { statusCode: 404, data: [], status: "not found" };

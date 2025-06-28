@@ -4,6 +4,7 @@ import { useDashboardStore } from "~/store/dashboardStore";
 import { computed } from "vue";
 
 import {
+  Text,
   LayoutPanelTop,
   SquareDashedBottomCode,
   Key,
@@ -78,11 +79,24 @@ const cstyle = computed(() => {
 
       <div
         class="dash-sidebar-item"
-        :style="cstyle['explore']"
-        @click="dashboardStore.setNowDashboardTab('explore')"
+        :style="cstyle['prompts']"
+        @click="dashboardStore.setNowDashboardTab('prompts')"
       >
-        <Telescope />
-        <div>Explore</div>
+        <Text  />
+        <div>Prompts</div>
+      </div>
+
+
+
+
+
+      <div
+        class="dash-sidebar-item"
+        :style="cstyle['feedback']"
+        @click="dashboardStore.setNowDashboardTab('feedback')"
+      >
+        <MessageSquareText />
+        <div>Feedback</div>
       </div>
 
       <div
@@ -96,14 +110,12 @@ const cstyle = computed(() => {
 
       <div
         class="dash-sidebar-item"
-        :style="cstyle['feedback']"
-        @click="dashboardStore.setNowDashboardTab('feedback')"
+        :style="cstyle['explore']"
+        @click="dashboardStore.setNowDashboardTab('explore')"
       >
-        <MessageSquareText />
-        <div>Feedback</div>
+        <Telescope />
+        <div>Explore</div>
       </div>
-
-
     </div>
   </Transition>
 </template>

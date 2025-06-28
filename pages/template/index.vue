@@ -1,18 +1,16 @@
 <script setup>
 import { usePopupStore } from "~/store/popupStore";
-import logo from "~/assets/img/logo.svg";
 import { SearchSlash, Link, Copy, Star, Download,EqualNot } from "lucide-vue-next";
 
 import "~/assets/github-markdown-dark.css";
 import MarkdownRender from "~/components/MarkdownRender.vue";
 import { useTemplateData } from "~/composable/useTemplateData";
-import { useFuse } from "@vueuse/integrations/useFuse";
+
 
 const SearchTextFiled = ref("");
-const isSearchResult = ref(false);
 
 const route = useRoute();
-const Router = useRouter();
+
 
 const PopStore = usePopupStore();
 
@@ -35,11 +33,13 @@ const templateData = ref({
   id: "",
 });
 
-const allTemplates = ref([]);
 
-const filteredTemplates = computed(() =>
-  searchTemplatesByIdAndStack(SearchTextFiled.value, allTemplates.value)
-);
+
+const searchTemplate = async () => {
+
+  await navigateTo("/explore/search?text="+SearchTextFiled.value)
+}
+
 
 function monthsAgo(dateString) {
   const inputDate = new Date(dateString);
@@ -55,48 +55,19 @@ function monthsAgo(dateString) {
     totalMonths -= 1;
   }
 
-  return totalMonths <= 0
-    ? "0 months ago"
-    : `${totalMonths} month${totalMonths > 1 ? "s" : ""} ago`;
-}
-
-function searchTemplatesByIdAndStack(query, data) {
-  const lowerQuery = query.toLowerCase().trim();
-
-  if (lowerQuery === "") {
-    return data;
+  if (totalMonths <= 0) {
+    // Calculate days difference
+    const msPerDay = 1000 * 60 * 60 * 24;
+    const daysDiff = Math.floor((now - inputDate) / msPerDay);
+    return daysDiff <= 0
+      ? "today"
+      : `${daysDiff} day${daysDiff > 1 ? "s" : ""} ago`;
   }
 
-  var tempData = [];
-
-  data.forEach((element) => {
-    tempData.push(`${element.id}   ${element.stack.join(" ")}`);
-    console.log(`${element.id}   ${element.stack.join(" ")}`);
-  });
-
-  const { results } = useFuse(query, tempData);
-
-  var finalData = [];
-
-  console.log(results.value);
-
-  results.value.forEach((element) => {
-    finalData.push(data[element.refIndex]);
-  });
-
-  return finalData;
+  return `${totalMonths} month${totalMonths > 1 ? "s" : ""} ago`;
 }
 
-const onInputSearch = async () => {
-  const { getAllTemplates } = await useTemplateData();
 
-  const { response } = await getAllTemplates();
-
-  allTemplates.value = response.value;
-  console.log(response.value, "all templates");
-
-  isSearchResult.value = true;
-};
 
 const loadTemplateData = async () => {
   const { getTemplateData } = await useTemplateData();
@@ -106,14 +77,15 @@ const loadTemplateData = async () => {
 
   if (response.value && Object.keys(response.value).length === 0) {
     isTemplateFound.value = false;
-    console.log("not found");
+    // console.log("not found");
   } else {
     isTemplateFound.value = true;
   }
 
   templateData.value = response.value;
+  console.log(templateData.value);
 
-  console.log(response.value, "templatea-data");
+  // console.log(response.value, "templatea-data");
 };
 
 function copyText(text) {
@@ -121,28 +93,15 @@ function copyText(text) {
 }
 
 onMounted(async () => {
+  PopStore.setIsLoadedPop(false);
   await loadTemplateData();
   PopStore.setIsLoadedPop(false);
-});
+})
+
 </script>
 
 <template>
-  <div id="template-header">
-    <div id="th-brand">
-      <div>
-        <img :src="logo" alt="" />
-        COOK
-      </div>
-    </div>
-
-    <div id="nav-links">
-      <NuxtLink to="/?next=false" class="nav-link"> Home </NuxtLink>
-
-      <NuxtLink to="/app" class="nav-link"> Docs </NuxtLink>
-
-      <NuxtLink to="/app" class="nav-link"> Community </NuxtLink>
-    </div>
-  </div>
+  <BasicHeader/>
   <div id="temp-box">
     <div id="main-box" v-if="!isTemplateFound" class="not-found-box">
 
@@ -164,33 +123,9 @@ onMounted(async () => {
           type="text"
           placeholder="Search..."
           v-model="SearchTextFiled"
-          @focus="onInputSearch()"
-          @keydown.esc="isSearchResult = false"
+          @keydown.enter="searchTemplate"
         />
       </div>
-      <Transition>
-        <div id="search-item-box" v-if="isSearchResult">
-          <div
-            class="sib-item"
-            v-for="template in filteredTemplates"
-            :key="template"
-          >
-            <div>
-              <a :href="`/template?uid=` + template.id">
-                {{ template.id }}65
-              </a>
-            </div>
-            <div>
-              <span
-                class="ib-card"
-                v-for="item in template.stack"
-                :key="item"
-                >{{ item }}</span
-              >
-            </div>
-          </div>
-        </div>
-      </Transition>
 
       <div id="mb-head">
         {{ templateData.name }}
@@ -199,7 +134,7 @@ onMounted(async () => {
 
       <div id="mb-uuid">
         <div>{{ templateData.id }}</div>
-        <span @click="copyText(templateData.id)">
+        <span @click="copyText('')">
           <Copy color="#FFFFFF" size="18px" />
         </span>
       </div>
@@ -207,9 +142,8 @@ onMounted(async () => {
       <div id="mb-status">
         <span id="mbs-version">{{ templateData.version }}</span>
         •
-        <span id="mbs-public">{{
-          templateData.public ? "public" : "private"
-        }}</span>
+        <span id="mbs-public" v-if="templateData.public">public</span>
+        <span id="mbs-private" v-if="!templateData.public">private</span>
         •
         <span id="mbs-time">Published {{ monthsAgo(templateData.date) }}</span>
       </div>
@@ -294,7 +228,6 @@ onMounted(async () => {
 }
 
 .not-found-desc {
-  color: #aaa;
   font-size: 1.1rem;
   margin-bottom: 25px;
   text-align: center;
@@ -397,6 +330,10 @@ onMounted(async () => {
   color: var(--green);
 }
 
+#mbs-private {
+  color: var(--pink);
+}
+
 a {
   text-decoration: none;
 }
@@ -466,64 +403,6 @@ a {
   background-color: var(--bg);
   border: 1px solid var(--border);
   border-radius: 10px;
-}
-
-#template-header {
-  /* width: 100%; */
-  height: 40px;
-  background-color: var(--bg2);
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 3px 20px;
-  margin-right: 10px;
-  margin-left: 10px;
-  border: 1px solid transparent;
-  transition: all ease-in-out 200ms;
-}
-
-#th-brand {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  /* border: 1px solid saddlebrown; */
-}
-
-#th-brand img {
-  height: 35px;
-}
-
-#th-brand div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--green);
-  font-weight: 500;
-  gap: 10px;
-}
-
-#template-header:hover {
-  border: 1px solid var(--border);
-}
-
-#nav-links {
-  display: flex;
-  gap: 20px;
-}
-
-.nav-link {
-  color: var(--white);
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 500;
-  border-bottom: 2px solid transparent;
-  transition: all 200ms ease-in-out;
-}
-
-.nav-link:hover {
-  border-bottom: 2px solid var(--red);
 }
 
 /* .v-enter-active,

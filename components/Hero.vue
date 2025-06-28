@@ -1,6 +1,8 @@
 <script setup>
+import { motion } from 'motion-v';
 import HomeTerminal from './HomeTerminal.vue';
 import MyBtn from './MyBtn.vue';
+
 
 </script>
 
@@ -8,21 +10,43 @@ import MyBtn from './MyBtn.vue';
   <div id="hero-box">
     <span>
 
-    <h1>COOK</h1>
+    <motion.h1
+        :initial="{ opacity: 0, y: 80, scale: 1, filter: 'blur(12px)' }"
+        :animate="{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }"
+        :transition="{ type: 'spring', stiffness: 120, damping: 14, delay: 0.40 }"
+        :in-view-options="{ once: true }"
+    >COOK</motion.h1>
 
-    <h3>CODE COOKING FOR LAZY DEVELOPERS</h3>
+    <motion.h3
+    :initial="{ opacity: 0, y: 80, scale: 1, filter: 'blur(12px)' }"
+    :animate="{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }"
+    :transition="{ type: 'spring', stiffness: 120, damping: 14, delay: 0.70 }"
+    :in-view-options="{ once: true }"
 
-    <p>
+    >CODE COOKING FOR LAZY DEVELOPERS</motion.h3>
+
+    <motion.p
+    :initial="{ opacity: 0, y: 80, scale: 1, filter: 'blur(12px)' }"
+    :animate="{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }"
+    :transition="{ type: 'spring', stiffness: 120, damping: 14, delay: 1 }"
+    :in-view-options="{ once: true }"
+    >
       A everyday CLI tool for you, like a swiss army knife?
       But for the developers.
-    </p>
+    </motion.p>
 
-    <div id="waitlist-btn" >
+    <motion.div id="waitlist-btn"
+    :initial="{ opacity: 0, x: -80, scale: 1, filter: 'blur(12px)' }"
+    :animate="{ opacity: 1, x: 0, scale: 1, filter: 'blur(0px)' }"
+    :transition="{ type: 'spring', stiffness: 120, damping: 14, delay: 1.2 }"
+    :in-view-options="{ once: true }"
+
+    >
       <!-- WAITLIST -->
       <MyBtn color="green" :callback="() => scrollToElement('#waitlist-box')">
         WAITLIST
       </MyBtn>
-    </div>
+    </motion.div>
 
     </span>
 
@@ -58,6 +82,7 @@ h1{
   font-size: 80px;
   margin: 10px;
   color: whitesmoke;
+  text-shadow: 0 0 20px var(--white), 0 0 40px var(--white), 0 0 60px var(--green);
   /* margin-top: 50px; */
 }
 

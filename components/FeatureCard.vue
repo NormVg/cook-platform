@@ -1,4 +1,5 @@
 <script setup>
+
 const props = defineProps({
   head: {
     default: "Code Snippet",
@@ -9,21 +10,65 @@ const props = defineProps({
       "Store, reuse, and share code snippets both locally and publicly. Speed up your coding with ready-made solutions.",
     type: String,
   },
+  index:{
+    default:0
+  }
 });
+
+const delaya = computed(() => `${props.index * 100}ms`  );
+
+
+import { useInView } from 'motion-v'
+
+
+const domRef = ref()
+const isInView = useInView(domRef,{ once: true })
+
+
+const myclass = computed(()=>{
+
+
+  if (isInView.value === true){
+    return "in-view-card"
+  }else{
+    return "no-in-view-card"
+  }
+})
+
+
 </script>
 
 <template>
-  <div id="card-feature-box">
-    <div id="cf-icon">
-      <slot></slot>
-    </div>
-    <div id="cf-head">{{ props.head }}</div>
-    <div id="cf-sub">{{ props.sub }}</div>
+<div  id="card-feature-box" ref="domRef" :class="myclass" :style="{animationDelay:delaya}">
+  <div id="cf-icon">
+    <slot></slot>
   </div>
+  <div id="cf-head">{{ props.head }}</div>
+  <div id="cf-sub">{{ props.sub }}</div>
+</div>
 </template>
 
 <style scoped>
+@keyframes fadeBlurUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+
+.in-view-card{
+animation: fadeBlurUp 0.6s ease-out forwards;
+}
+
 #card-feature-box {
+    will-change: transform, opacity, filter;
   background-color: var(--bg2);
 
   border: 1px solid var(--border);
@@ -40,6 +85,8 @@ const props = defineProps({
   gap: 15px;
 
   transition: all 200ms ease-in-out;
+    opacity: 0;
+
 }
 
 #card-feature-box:hover {
