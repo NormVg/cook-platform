@@ -6,17 +6,17 @@ export default defineNuxtRouteMiddleware(async (to) => {
     return
   }
 
-  if (to.path === "/login"){
-    await navigateTo("/");
-  }
+  // if (to.path === "/login"){
+  //   await navigateTo("/");
+  // }
 
-  if (to.path === "/signup"){
-    await navigateTo("/");
-  }
+  // if (to.path === "/signup"){
+  //   await navigateTo("/");
+  // }
 
-  if (to.path === "/app"){
-      await navigateTo("/");
-  }
+  // if (to.path === "/app"){
+  //     await navigateTo("/");
+  // }
 
 
   if (process.client) {
