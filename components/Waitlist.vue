@@ -115,7 +115,7 @@ const waitlistJoin = async () => {
   background-color: var(--bg2);
   margin: 50px auto;
   /* width: 50vw; */
-  padding: 10px;
+  padding: 20px 15%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -208,6 +208,7 @@ h2 {
 
 #waitlist-box{
   width: 90%;
+  padding: 10px
 }
 
 h2{
