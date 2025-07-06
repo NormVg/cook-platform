@@ -3,6 +3,18 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
 
+
+  nodemailer: {
+    from: '"TheAlphaOnes" <thealphaones.hq@gmail.com>',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.MAIL_ACC,
+      pass: process.env.MAIL_PASS,
+    },
+  },
+
   runtimeConfig: {
     appWriteKey: process.env.APPWRITE_API_KEY,
     appWriteProject: process.env.APPWRITE_API_PROJECT,
@@ -26,5 +38,5 @@ export default defineNuxtConfig({
   },
 
 
-  modules: ["@pinia/nuxt",'motion-v/nuxt'],
+  modules: ["@pinia/nuxt",'motion-v/nuxt','nuxt-nodemailer'],
 })
